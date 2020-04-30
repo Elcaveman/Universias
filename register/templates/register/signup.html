@@ -1,0 +1,11 @@
+{% extends 'register/base.html' %}
+
+{% block form %}
+<form method="post">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ user_extras.as_p }}
+    {{ profile_form.as_p }}
+    <button type="submit">Signup!</button>
+</form>
+{% endblock form %}
