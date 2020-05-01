@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from .forms import UserForm , UserExtrasForm , ProfileForm , AuthenticationForm
+from .forms import UserForm , UserExtrasForm , ProfileForm , AuthenticationForm , UserCreationForm
 
 from django.contrib.auth import login, authenticate,logout
 from django.contrib import messages
@@ -43,7 +43,7 @@ def logout_view(request):
 @no_user_required
 def signup(request):
     if request.method == 'POST':
-        user_form = UserForm(request.POST)
+        user_form = UserCreationForm(request.POST)
         user_extras = UserExtrasForm(request.POST)
         profile_form = ProfileForm(request.POST)
         if user_form.is_valid() and user_extras.is_valid() and profile_form.is_valid():
@@ -63,7 +63,7 @@ def signup(request):
             login(request, user)
             return redirect('/')
     else:
-        user_form = UserForm()
+        user_form = UserCreationForm()
         user_extras = UserExtrasForm()
         profile_form = ProfileForm()
     context = {
@@ -88,7 +88,6 @@ def display_user(request):
 def update_profile(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
-        user_extras = UserExtrasForm(request.POST , instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -96,11 +95,16 @@ def update_profile(request):
             messages.success(request,'Your profile was successfully updated!')
             return redirect('/profile/')
         else:
-            messages.error(request,'Please correct the error below.')
+            for msg in user_form.error_messages:
+                messages.error(request , f"{msg} : {user_form.error_messages[msg]}")
+
+            for msg in profile_form.error_messages:
+                messages.error(request , f"{msg} : {profile_form.error_messages[msg]}")
+
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'profiles/profile.html', {
+    return render(request, 'register/profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
     })
