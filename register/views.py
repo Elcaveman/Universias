@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from .forms import UserForm,UserExtrasForm,ProfileForm
+from .forms import UserForm , UserExtrasForm , ProfileForm , AuthenticationForm
 
 from django.contrib.auth import login, authenticate,logout
 from django.contrib import messages
@@ -16,8 +16,24 @@ def no_user_required(view):
             return view(request)
     return wrapper
 
+@no_user_required
 def login_view(request):
-    return HttpResponse('login')
+    if request.method == 'POST':
+        form = AuthenticationForm(request.POST)
+        if form.is_valid():
+            user = authenticate(request , **form.cleaned_data)
+            if user is None:
+                messages.error(request,'Login failed! password or username is incorrect')
+            else:
+                messages.success(request , 'You\'re logged in as {}'.format(form.cleaned_data.get('username')))
+                login(request,user)
+                return redirect('/')
+        else:
+            for msg in form.error_messages:
+                messages.error(request , f"{msg} : {form.error_messages[msg]}")
+    else:
+        form = AuthenticationForm()
+    return render(request , 'register/login.html' , {'form':form})    
 
 @login_required(login_url='/login/')
 def logout_view(request):

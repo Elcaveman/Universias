@@ -1,0 +1,14 @@
+{% extends 'register/base.html' %}
+
+{% block form %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+    <button type="submit">Signin!</button>
+</form>
+{% endblock form %}
