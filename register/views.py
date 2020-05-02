@@ -108,3 +108,10 @@ def update_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
+
+# Class-based password reset views in auth.views module
+# - PasswordResetView sends the mail
+# - PasswordResetDoneView shows a success message for the above
+# - PasswordResetConfirmView checks the link the user clicked and
+#   prompts for a new password
+# - PasswordResetCompleteView shows a success message for the above

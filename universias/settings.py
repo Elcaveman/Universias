@@ -129,3 +129,14 @@ STATICFILES_DIRS = [
 ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 MEDIA_URL = '/media/'
+
+#SMTP Configuration
+EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'universias.mail@gmail.com'
+EMAIL_HOST_PASSWORD = '?^[B2CyV.YaxL)!s'
+
+#Login
+LOGIN_URL = '/login/'
