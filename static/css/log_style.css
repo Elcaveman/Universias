@@ -1,0 +1,190 @@
+body {
+        background: rgb(14, 8, 8) !important;
+        height: 100%;
+        font-family: "Montserrat", sans-serif;
+      }
+      
+      
+      #nav-bar{
+          position: sticky;
+          top:0;
+          background-color:rgb(14, 8, 8) ;
+          z-index: 10;
+          border: 2px solid  #7b424f85;
+      }
+      
+      .navbar-brand img{
+          height: 40px;
+          padding-left: 20px;
+      
+      }
+      .nav-pills li{
+          padding: 0 10px;
+      }
+      .nav-pills li a{
+          color: white !important;
+          font-weight:600;
+      }
+      .navbar-toggler:hover{
+          filter: blur(0px) brightness(150%) !important;
+          box-shadow: 0 0 5px rgb(91, 235, 187), 0 0 25px rgb(91, 235, 187),
+          0 0 50px rgb(91, 235, 187), 0 0 100px rgb(91, 235, 187);
+      }
+      .container {
+        position: relative;
+        border-radius: 5px;
+        
+        padding: 20px 0 200px 0;
+        
+      } 
+      
+      .col {
+        float: left;
+        width: 50%;
+        margin: auto;
+        padding: 0 50px;
+        margin-top: 6px;
+      }
+      
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      /*------------banner---*/
+      #banner{
+
+          color: antiquewhite;
+          padding-top:5%;
+      }
+      .promo-title{
+          font-size: 40px;
+          font-weight: 600;
+          margin-top: 100px;
+      }
+      #banner a{
+          color:white;
+      text-decoration: none;
+      
+      text-align: center;
+      }
+      #banner a:hover{
+          color:rgb(91, 235, 187);
+      }
+      
+      .cont {
+        width: 400px;
+        height: 500px;
+       margin: 0 auto;
+        background-color: black;
+        position: center;
+       
+        border-radius: 10px;
+        
+        color: white;
+        text-align: center;
+        border: 2px solid #7b424f85;
+      }
+      .cont h1 {
+          padding-top:10px;
+        font-size: 40px;
+        margin-bottom: 60px;
+        color:white;
+      }
+      .tbox {
+        width: 260px;
+        height: 40px;
+        background: #f1f1f1b3;
+        margin: 10px auto;
+        border: 2px solid rgb(91, 235, 187);
+        border-radius: 10px;
+      }
+      .tbox:hover {
+        width: 280px;
+        border: 2px solid #79354585;
+      }
+      .tbox input {
+        background: none;
+        border: none;
+        outline: none;
+        text-align: center;
+        width: 200px;
+        line-height: 37px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 14px;
+        color: rgb(56, 27, 27);
+      }
+      .tbox input[type="text"],
+      .tbox input[type="password"] :focus {
+        width: 250px;
+      }
+      .btn {
+        width: 180px;
+        height: 40px;
+        background: rgb(91, 235, 187) !important;
+        border-radius: 10px;
+        margin: 14px auto;
+        display: block;
+        font-family: "Montserrat", sans-serif;
+        font-size: 16px;
+        border: none;
+        color: aliceblue;
+        cursor: pointer;
+      }
+      .btn1 {
+        width: 180px;
+        height: 40px;
+        background:#7b424f85;
+        border-radius: 10px;
+        margin: 14px auto;
+        display: block;
+        font-family: "Montserrat", sans-serif;
+        font-size: 16px;
+        border: none;
+        color: aliceblue;
+        cursor: pointer;
+      }
+      .btn1:hover {
+        background: #9e6f7a85 ;
+      }
+      .btn:hover {
+        box-shadow: 0 0 5px rgb(91, 235, 187), 0 0 25px rgb(91, 235, 187),
+          0 0 50px rgb(91, 235, 187), 0 0 100px rgb(91, 235, 187);
+      }
+      .b1 {
+        display: block;
+        width: 260px;
+        padding: 10px 0;
+        text-decoration: none;
+        color: white !important;
+        text-align: center;
+        margin: auto;
+        transition: 0.4s all;
+      }
+      .b2 {
+        position: absolute;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 260px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-align: center;
+        margin: auto;
+        transition: 0.4s all;
+        color: white !important;
+      }
+      a:hover {
+        background: #7b424f85;
+      }
+      .back{
+          background-color: #7b424f85;
+      }
+      @media screen and (max-width: 900px) {
+        .col {
+          width: 100%;
+          margin-top: 0;
+          padding-bottom: 50px;
+        }}
+      

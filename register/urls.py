@@ -10,7 +10,7 @@ urlpatterns = [
     path('profile/',v.display_user,name='user_profile'),
     path('profile/<int:user_id>/',v.display_profile, name='display_profile'),
     path('profile/update/',v.update_profile , name='update_profile'),
-    
+ 
     path('reset_password/' , auth_views.PasswordResetView.as_view(
         template_name='register/recup/reset_password.html'),
     name = "reset_password"),
@@ -22,3 +22,10 @@ urlpatterns = [
     name='password_reset_complete'),
     
 ]
+   
+# Class-based password reset views in auth.views module
+# - PasswordResetView sends the mail
+# - PasswordResetDoneView shows a success message for the above
+# - PasswordResetConfirmView checks the link the user clicked and
+#   prompts for a new password
+# - PasswordResetCompleteView shows a success message for the above

@@ -1,0 +1,141 @@
+
+{% extends 'library/base.html' %}
+{% load static %}
+{% block home %}
+<section id="landing">
+    <div class="container title">
+      
+              <header class="text-center" >UNIVERSIAS
+              </header>
+              <br>
+               <h1 class="text-center" ><strong>ENSIAS IT CENTER FOR SCIENTIFIQUE PROJECTS</strong></h1>
+               <div class="text-center">
+                <br>
+              <a href="/signup/"> <button type="button" class="btn btn-light btn-lg p-10">Join us</button></a>
+              </div>
+      </div>
+</section>
+
+<section class="tag">
+  <div class="container"> 
+        <p class="mt0 mb50 text-center" style="font-size: 50px; text-align:center;">A propos du centre IT ENSIAS</p>
+      
+</section>
+
+<section class="about_it">
+  <div class="container ">
+   
+  <div class="row">
+      <div class="col-md-4">
+          <div class="probootstrap-card text-center probootstrap-animate">
+            <div class="probootstrap-card-media svg-sm colored">
+              <a href="/teams/"> <img src="{% static '/images/cherche.jpg' %}" class="svg"></a>
+            </div>
+            <div class="probootstrap-card-text">
+              <h2 class="probootstrap-card-heading">Chercheurs</h2>
+              <p>user.count</p>
+              <a href="/teams/"><button class="btn btn-info">Savoir plus</button></a>
+            </div>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="probootstrap-card text-center probootstrap-animate">
+            <div class="probootstrap-card-media svg-sm colored">
+              <a href="/posts/"> <img src="{% static '/images/pub.png' %}" class="svg"></a>
+            </div>
+            <div class="probootstrap-card-text">
+              <h2 class="probootstrap-card-heading">Publications</h2>
+              <p>pub.count</p>
+              <a href="/posts/"><button class="btn btn-info">Savoir plus</button></a>
+            </div>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="probootstrap-card text-center probootstrap-animate">
+            <div class="probootstrap-card-media svg-sm colored">
+              <a href="/labs/"> <img src="{% static '/images/test-tube.png' %}" class="svg"></a>
+            </div>
+            <div class="probootstrap-card-text">
+              <h2 class="probootstrap-card-heading">Laboratoire</h2>
+              <p>labo.count</p>
+              <a href="/labs/"><button class="btn btn-info">Savoir plus</button></a>
+            </div>
+          </div>
+      </div>
+        
+
+  </div>
+  </div>
+</section>
+<section class="tag_t">
+  <div class="container"> 
+        <p class="text-center" style="font-size: 50px;">Objectifs stratégiques</p>
+    </div>
+</section>
+
+
+  <section class="objectif">
+ <div class="container">
+    
+      <div class="row">
+        <div class="col-md-6">
+          <!--<h2><i><strong> Objectifs stratégiques</strong></i></h2>-->
+          <h4 class="text-center" style="padding-top: 100px">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum quod eos est officiis magnam autem, laborum asperiores at ipsam ducimus?
+          </h4>
+        </div>
+        <div class="col-md-6">
+          <img src="{% static '/images/tof.svg' %}" class="img-fluid">
+        </div>
+      </div>
+ </div>
+</section>
+
+<!--<section class="tag_t">
+  <div class="container"> 
+        <p class="text-center" style="font-size: 50px;"><i><strong>Contributors</strong></i></p>
+      
+</section>-->
+<section class="contrib">
+ 
+  <div class="container">
+    <p class="text-center" style="font-size: 50px;font-family:'Cambo'";><i>Contributors</i></p>
+      
+    <!--<h2><i><strong>Contributors</strong></i></h2>  -->
+    <br>
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 probootstrap-animate">
+          <div class="service text-center">
+           <div class="icon"><img class="icon" src="{% static '/images/man.png' %}"></div>
+            <h2 class="heading">Prof name</h2>
+            <a href=""><h4>Bio</h4></a>
+              
+            <a href=""><h5>Publication</h5></a>
+          </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  probootstrap-animate">
+          <div class="service text-center">
+           <div class="icon"><img class="icon" src="{% static '/images/man.png' %}"></div>
+            <h2 class="heading">Prof name</h2>
+            <a href=""><h4>Bio</h4></a>
+              
+            <a href=""><h5>Publication</h5></a>
+            
+          </div>
+    </div>
+     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 probootstrap-animate">
+          <div class="service text-center" >
+            <div class="icon"><img class="icon" src="{% static '/images/man.png' %}"></div>
+            <h2 class="heading">Prof name</h2>
+            <a href=""><h4>Bio</h4></a>
+              
+            <a href=""><h5>Publication</h5></a>
+          </div>
+        </div>
+  </div>
+
+  </section>
+</div>
+
+{% endblock home %}
+    

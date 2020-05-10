@@ -1,0 +1,27 @@
+{% extends 'library/base.html' %}
+{% block post_detail %}       
+    <div>
+        <h1>{{ post.title }}</h1>
+        <a href="#">
+            {% if post.illustration %}
+                <img loading="lazy" src="{{ post.illustration.url }}" alt="postimg">
+            {% else %}
+                <!-- TODO add default illustration -->
+                <p>No image</p>
+            {% endif %}
+        </a>
+        <p>{{ post.description }}</p>
+    </div>
+    <div class="urls">
+
+    </div>
+    <div class='authors-flex'>
+        {% for author in post.authors.all %}
+            {{ author.name }}
+        {% endfor %}
+    </div>
+    <div class='links'>
+        
+    </div>
+{% endblock post_detail %}
+

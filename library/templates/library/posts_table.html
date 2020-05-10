@@ -1,0 +1,32 @@
+{%  extends 'library/base.html' %}
+{% load static %}
+{% block posts_table %}
+ 
+<div class="table container" style="padding-top: 15px!important;">
+  <form class="form-inline active-cyan-4">
+    {% csrf_token %}
+    <input class="form-control form-control-sm mr-10 w-75" type="text" placeholder="Search"
+      aria-label="Search" style="margin: 15px!important;">
+    <i class="fas fa-search" aria-hidden="true"></i>
+  </form>
+    <table class="table table-bordered">
+      <thead>
+        <tr class="table-info">
+          <th data-column="title" data-order="desc">Title</th>
+          <th data-column="type" data-order="desc">Type</th>
+          <th data-column="authors" data-order="desc">Authors</th>
+          <th data-column="timestamp" data-order="desc">Published on</th>
+          <th data-column="link" data-order="desc">Link</th>
+        </tr>
+      </thead>
+      <tbody id="PostsTable">
+      </tbody>
+    </table>
+    
+  </div>
+{% endblock %}
+
+{% block post_table_script %}
+<script src="{% static '/js/table.js' %}"></script>
+{% endblock post_table_script %}
+  

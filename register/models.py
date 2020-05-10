@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Create your models here.
+#TODO: change the position to actual permissions/groups in auth.models
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)

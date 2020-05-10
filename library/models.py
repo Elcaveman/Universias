@@ -1,11 +1,8 @@
 from django.db import models
-# Create your models here.
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
 from register.models import Profile
-
 
 class Team(models.Model):
     name = models.CharField("Team name", max_length=50)

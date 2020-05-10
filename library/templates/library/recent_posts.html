@@ -1,0 +1,62 @@
+{% extends 'library/base.html' %}
+
+{% block recent_posts %}
+        
+<div id="catalog-left">
+    <!-- sidenav -->
+</div>
+<div id="dashboard-wrapper">
+    
+    {% if recent_posts %}
+        <div class="row-max-3">
+            {% for post in recent_posts %}
+            <!--TODO need to learn how to use block content + context  -->
+            <div class="card card-lesson">
+                <!-- <a href="{% url 'library:item_detail' post.id %}"> -->
+                <a href="{% url 'library:item_detail' post.id %}">
+                {% if post.illustration %}
+                    <img loading="lazy" src="{{ post.illustration.url }}" alt="postimg">
+                {% else %}
+                    <!-- TODO add default illustration -->
+                    <p>No image</p>
+                {% endif %}
+                <h3>{{ post.title }}</h3>
+                </a>
+
+                <div class="card-content">
+                    <p>{{ post.description }}</p>    
+                    {% for author in post.authors.all|slice:":3" %}
+                        <!-- TODO ref to author profile -->
+                        <a href="{% url 'library:profil' author.pk %}">
+                            <div class="mini-profile">
+                                <div class="mini-pic-container">
+                                    
+                                    {% if author.profil_pic %}
+                                        <img src="{{ author.profil_pic.url }}" alt="" class="mini-pp">
+                                    {% else %}
+                                        <img src="{% static '/library/images/blank.png' %}" alt="" class="mini-pp">  
+                                    {% endif %}
+                                        
+                                    
+                                        
+                                </div>
+                                <div class="mini-author-container">
+                                    <p>{{ author.name }}</p>
+                                </div>
+                            </div>
+                        </a>
+                        {% if forloop.counter > 3 %}
+                            <a href="#"><span>...</span></a>
+                        {% endif %}
+                            
+                        
+                    </span></a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p> No content courses </p>
+    {% endif %}
+{% endblock recent_posts %}
