@@ -24,8 +24,20 @@ SECRET_KEY = 'b)7=)a1e&2nl4(l)z696j6kw)b@2avi0ihcov_$7tq5r(48e^9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#? how to use CND with DEBUG set to false?
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    'https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css',
+    "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons",
+    "https://rawgit.com/creativetimofficial/material-kit/master/assets/css/material-kit.css",
+    "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js",
+    "https://kit.fontawesome.com/a076d05399.js",
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js",
+    "https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js",
+    ]
 
 
 # Application definition

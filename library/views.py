@@ -5,12 +5,19 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from . import models
 
+from django.conf.urls import handler404 , handler500
+
 from django.utils import timezone
 from django.http import Http404,HttpResponse
 from django.shortcuts import render,redirect
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 
+from django.template import RequestContext
 import json
+
+handler404 = "library.views.view_404"
+handler500 = "library.views.view_500"
+
 #API data (switch to rest api afterwards)
 @login_required
 def postsAPI(request):
@@ -79,3 +86,10 @@ def teams(request):
 
 def labs(request):
     return HttpResponse('labs')
+
+#!Error page handler NOT WORKINGs
+def view_404(request):
+    return render(request , 'library/404.html')
+
+def view_500(request):
+    return render(request , 'library/500.html')

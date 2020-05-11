@@ -37,8 +37,14 @@
         {% for author in post.authors.all %}
         <div class="col col-lg-4">
           <div class="probootstrap-card text-center probootstrap-animate">
-                
-            <img src="{% static 'images/user.png' %}" class="svg">
+            
+            {% if author.profile_pic %}
+            <img src="{{ author.profile_pic.url }}" class="svg">
+            {% else %}
+            <img src="{% static 'images/man.png' %}" class="svg">
+            {% endif %}
+              
+            
             <div class="probootstrap-card-text">
                 <h2>{{ author }}</h2>
                 
@@ -106,3 +112,8 @@
     
 {% endblock post_detail %}
 
+
+{% block item_css %}
+<link rel="stylesheet" href="{% static 'css/main_nd.css' %}">
+{% endblock item_css %}
+  

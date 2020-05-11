@@ -71,20 +71,17 @@ def signup(request):
             for msg in user_form.error_messages:
                 messages.error(request,
                 f"{msg}: {user_form.error_messages[msg]}")
-
-            for msg in user_extras.error_messages:
+            
+            for msg in user_form.error_messages:
                 messages.error(request,
-                f"{msg}: {user_extras.error_messages[msg]}")
-
-            for msg in profile_form.error_messages:
-                messages.error(request,
-                f"{msg}: {profile_form.error_messages[msg]}")
+                f"{msg}: {user_form.error_messages[msg]}")
 
     else:
         user_form = UserCreationForm()
         user_extras = UserExtrasForm()
         profile_form = ProfileForm()
-        context = {
+
+    context = {
         'user_form':user_form,
         'user_extras':user_extras,
         'profile_form':profile_form,}
