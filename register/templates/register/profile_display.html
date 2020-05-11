@@ -1,5 +1,8 @@
-{% extends 'register/base.html' %}
+{% extends 'library/base.html' %}
 {% load static %}
+{% block profile_css %}
+<link href="{% static '/css/profile.css' %}" rel="stylesheet">
+{% endblock profile_css %}
 {% block display %}
 <div class="main main-raised" style='margin:6rem 8rem 4rem 8rem;'>
     <div class="profile-content">
@@ -88,7 +91,7 @@
 {% endblock display %}
 
 
-{% block table_script %}
+{% block post_table_script %}
 <script src="{% static '/js/table.js' %}"></script>
-{% endblock table_script %}
+{% endblock post_table_script %}
   

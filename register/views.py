@@ -26,7 +26,7 @@ def login_view(request):
             if user is None:
                 messages.error(request,'Login failed! password or username is incorrect')
             else:
-                messages.success(request , 'You\'re logged in as {}'.format(form.cleaned_data.get('username')))
+                messages.success(request , 'Welcome {}'.format(form.cleaned_data.get('username')))
                 login(request,user)
                 return redirect('/')
         else:
@@ -39,6 +39,7 @@ def login_view(request):
 @login_required(login_url='/login/')
 def logout_view(request):
     logout(request)
+    messages.info(request,'Logout successful!')
     return redirect('/')
 
 @no_user_required
@@ -61,17 +62,32 @@ def signup(request):
 
             raw_password = user_form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
+            messages.success(request,"New Account Created!")
+            messages.info(request,f"Welcome {user.first_name}!")
             login(request, user)
             return redirect('/')
+        else:
+            #handling the errors with the built in django messages!
+            for msg in user_form.error_messages:
+                messages.error(request,
+                f"{msg}: {user_form.error_messages[msg]}")
+
+            for msg in user_extras.error_messages:
+                messages.error(request,
+                f"{msg}: {user_extras.error_messages[msg]}")
+
+            for msg in profile_form.error_messages:
+                messages.error(request,
+                f"{msg}: {profile_form.error_messages[msg]}")
+
     else:
         user_form = UserCreationForm()
         user_extras = UserExtrasForm()
         profile_form = ProfileForm()
-    context = {
+        context = {
         'user_form':user_form,
         'user_extras':user_extras,
-        'profile_form':profile_form,
-    }
+        'profile_form':profile_form,}
     return render(request, 'register/signup.html', context)
 
 @login_required(login_url='/login/')
@@ -81,6 +97,7 @@ def display_profile(request,user_id):
         return render(request,'register/profile_display.html',{'user_profile':user})
     except :
         raise Http404
+    
 @login_required(login_url='/login/')
 def display_user(request):
     user_id = request.user.id

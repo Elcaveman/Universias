@@ -2,21 +2,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universias</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-      <!--Import Bootstrap.css-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+    <link rel="stylesgeet" href="https://rawgit.com/creativetimofficial/material-kit/master/assets/css/material-kit.css">
     <link href="{% static '/css/all.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="{% static '/css/main.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static '/css/main_nd.css' %}">
+    <link href="{% static 'login/css/toast.css' %}" rel="stylesheet">
+    <!-- other CSS -->
+    
+    {% block login_css %}
+    {% endblock login_css %}
+
+    {% block profile_css %}
+    {% endblock profile_css %}
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
 
 </head>
-<body>
+<body class="profile-page">
     {% include 'library/includes/navbar.html' %}
-    
+    {% include 'register/messages.html' %}
     {% block home %}
     {% endblock home %}
         
@@ -27,6 +41,16 @@
 
     {% block post_detail %}
     {% endblock post_detail %}
+
+    <!--? for signup/login/profile_update -->
+    {% block form %}
+    {% endblock form %}
+    <!--? for password recuperation steps -->
+    {% block content %}
+    {% endblock content %}
+    <!--? for profile display -->
+    {% block display %}
+    {% endblock display %}
     
     {% include 'library/includes/footer.html' %}
     <!-- Jqurey minified-->
@@ -37,6 +61,9 @@
     
     {% block post_table_script %}
     {% endblock post_table_script %}
+    
+    {% block login_scripts %}
+    {% endblock login_scripts %}
     
 
     

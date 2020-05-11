@@ -6,12 +6,25 @@ class AuthenticationForm(forms.Form):
     """
     Base class for authenticating users. Extend this to get a form that accepts
     username/password logins.
+
+    <input class="input100" type="password" name="pass" placeholder="Password">
+    <input class="input100" type="text" name="email" placeholder="Email">
+
     """
-    username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True}))
+    username = UsernameField(widget=forms.TextInput(attrs={
+        'class':"input100",
+        'name':"email",
+        'placeholder':"Username",
+        'autofocus': True
+        }))
     password = forms.CharField(
         label="Password",
         strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password'}),
+        widget=forms.PasswordInput(attrs={
+            'class':"input100",
+            'name':"pass",
+            'placeholder':"Password",
+            'autocomplete': 'current-password'}),
     )
 
 
