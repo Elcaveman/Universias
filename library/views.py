@@ -12,6 +12,7 @@ from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 
 import json
 #API data (switch to rest api afterwards)
+@login_required
 def postsAPI(request):
     #use values to convert to JSON
     posts_queryset = models.Post.objects.all().values(
@@ -21,6 +22,13 @@ def postsAPI(request):
     #we can pass a non dict response by setting safe to FALSE!
     #why we call it safe? welp
     #?Before ECMAScript5 it was possible to poison the JavaScript Array constructor.
+    return JsonResponse(posts_list, safe = False)
+
+@login_required
+def user_posts(request , user_id):
+    posts_list = list(models.Post.objects.filter(authors__pk = user_id).values(
+        'id','title','pub_type','authors','timestamp'
+    ))
     return JsonResponse(posts_list, safe = False)
 
 #views

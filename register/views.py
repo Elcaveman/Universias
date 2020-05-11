@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from .forms import UserForm , UserExtrasForm , ProfileForm , AuthenticationForm , UserCreationForm
@@ -7,6 +7,7 @@ from .forms import UserForm , UserExtrasForm , ProfileForm , AuthenticationForm 
 from django.contrib.auth import login, authenticate,logout
 from django.contrib import messages
 
+from . import models
 #just a litle decorator that checks if user is loged in if he is goes to profile else it performs the view
 def no_user_required(view):
     def wrapper(request):
@@ -75,8 +76,11 @@ def signup(request):
 
 @login_required(login_url='/login/')
 def display_profile(request,user_id):
-    return HttpResponse('profile %d'%user_id)
-
+    try:
+        user = models.Profile.objects.filter(pk=user_id)[0]
+        return render(request,'register/profile_display.html',{'user_profile':user})
+    except :
+        raise Http404
 @login_required(login_url='/login/')
 def display_user(request):
     user_id = request.user.id

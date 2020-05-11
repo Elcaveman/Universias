@@ -5,35 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universias</title>
-      <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import Bootstrap.css-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+    <link rel="stylesgeet" href="https://rawgit.com/creativetimofficial/material-kit/master/assets/css/material-kit.css">
     <link href="{% static '/css/all.css' %}" rel="stylesheet">
     <link href="{% static '/css/main.css' %}" rel="stylesheet">
+    <link href="{% static '/css/profile.css' %}" rel="stylesheet">
 
 
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
-<body>
-    {% include 'register/includes/navbar.html' %}
+<body class="profile-page">
+  {% include 'library/includes/navbar.html' %}
+  <!--? for signup/login/profile_update -->
+  {% block form %}
+  {% endblock form %}
+  <!--? for password recuperation steps -->
+  {% block content %}
+  {% endblock content %}
+  <!--? for profile display -->
+  {% block display %}
+  {% endblock display %}
+  
+  {% include 'library/includes/footer.html' %}
+  <!-- Jqurey minified-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  
+  {% block table_script %}
     
-    <!--? for signup/login/profile_update -->
-    {% block form %}
-    {% endblock form %}
-
-    <!--? for password recuperation steps -->
-    {% block content %}
-    {% endblock content %}
-
-    <!--? for profile display -->
-    {% block diplay %}
-    {% endblock diplay %}
-        
-
-     <!-- Compiled and minified JavaScript -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-     <!-- Jqurey minified-->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  {% endblock table_script %}
+    
 </body>
 </html>

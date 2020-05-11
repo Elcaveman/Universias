@@ -46,7 +46,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     post_pic = models.ImageField(blank = True)
     pub_type = models.CharField("Post type", max_length=20,choices=TYPES)
-    authors= models.ManyToManyField("register.Profile", related_name='owners')
+    authors= models.ManyToManyField(to="register.Profile", related_name='owners')
     description = models.TextField()
 
     #extras/personal links

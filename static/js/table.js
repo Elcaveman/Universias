@@ -1,9 +1,12 @@
 // let's use jquery for now
 let array = []
 var barray=[]
+// let's get the url from the table
+var APIurl= document.getElementById('PostsTable').attributes['api'].value
+
 $.ajax({
     method:'GET',
-    url:'/postsAPI/',
+    url:APIurl,
     success:(response)=>{
         array = response;
         populate_table(array)

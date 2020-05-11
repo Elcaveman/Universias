@@ -2,7 +2,7 @@
 .title_project{
 	background-attachment: fixed;
 	background-repeat:no-repeat; 
-	background-image: url("images/bgr.png");
+	background-image: url("../images/bgr.png");
 	width:100%;
 	background-size: 100% 720px;
 	background-position: cover;

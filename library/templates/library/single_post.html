@@ -1,27 +1,108 @@
 {% extends 'library/base.html' %}
-{% block post_detail %}       
-    <div>
-        <h1>{{ post.title }}</h1>
-        <a href="#">
-            {% if post.illustration %}
-                <img loading="lazy" src="{{ post.illustration.url }}" alt="postimg">
-            {% else %}
-                <!-- TODO add default illustration -->
-                <p>No image</p>
-            {% endif %}
+{% load static %}
+{% block post_detail %}
+<section class="title_project">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h1>Title of the research</h1>
+          <hr>
+          <h3 style="color:grey"><strong><i>{{ post.description }}</i></strong></h3>
+          <p style="font-size:18px;color:white ;padding-top: 50px">{{ post.description }}</p>
+          <br>
+          <a href="{{ post.google_scholar }}">
+            <div class="btn btn-dark"><img class="ic" src="{% static 'images/ggle.png' %}">Google scholar</div>
         </a>
-        <p>{{ post.description }}</p>
+          <a href="{{ post.bibtex }}" download>
+            <div class="btn btn-dark"><img class="ic" src="{% static 'images/ggle.png' %}">BIBTEX</div>
+            </a>
+        </div>
+        <div class="col-lg-6">
+            
+            {% if post.post_pic %}
+            <img src="{{ post.post_pic.url }}" class="fluid" >
+            {% else %}
+            <img src="{% static 'images/dig.jpg' %}" class="fluid" >
+            {% endif %}
+        </div>
+      </div>
     </div>
-    <div class="urls">
-
-    </div>
-    <div class='authors-flex'>
+  </section>
+  
+  
+     
+    <section class="authors">
+      <div class="container" style="margin-bottom: 1rem;">
+      <div class="row justify-content-md-center">
         {% for author in post.authors.all %}
-            {{ author.name }}
+        <div class="col col-lg-4">
+          <div class="probootstrap-card text-center probootstrap-animate">
+                
+            <img src="{% static 'images/user.png' %}" class="svg">
+            <div class="probootstrap-card-text">
+                <h2>{{ author }}</h2>
+                
+                {% if author.position %}
+                <p class="title">{{ author.position }}</p>
+                {% else %}
+                <p class="title">Chercheur</p>
+                {% endif %}
+                
+                <p>{{ author.bio|slice:100 }}</p>
+                <a href="/profile/{{ author.user.id }}"><button class="btn btn-primary">View profile</button></a>
+            </div>
+            </div>
+        </div>
         {% endfor %}
     </div>
-    <div class='links'>
-        
-    </div>
+</div>
+    </section>
+   
+    <section class="extra" >
+      <div class="container">
+        <div class="row justify-content-md-center">
+  
+          <div class="col col-lg-4">
+            <h3><strong>URL</strong></h3>
+            <hr>
+            <a href="{{ post.URL }}"><button class="btn btn-info">Click Here!</button></a>
+            <br>
+          </div>
+          <div class="col col-lg-4 text-center">
+            <h3><strong>DOI</strong></h3>
+            <hr>
+            <div class="row">
+              <hr>
+              <div class="col">
+                <h4><strong>Google scholar</h4></strong>
+                <a href="{{ post.google_scholar }}">
+                  <div class="btn btn-dark"><img class="ic" src="{% static 'images/ggle.png' %}">Voir sur Google Scholar</div>
+              </a>
+                
+  
+              </div>
+              <div class="col">
+                <h4><strong>Bibtex</h4></strong>
+                <br>
+                <a href="{{ post.bibtex }}" download>
+                  <div class="btn btn-dark"><img class="ic" src="{% static 'images/ggle.png' %}">Telecharger en Bibtex!</div>
+              </a>
+  
+                
+              </div>
+            </div>
+            
+          </div>
+          <div class="col col-lg-4 text-center">
+            <h3><strong>REVUE</strong></h3>
+            <hr>
+            <img src="{% static 'images/SCOPUS.png' %}" class="chart center">
+  
+          </div>
+  
+        </div>
+      </div>
+    </section>
+    
 {% endblock post_detail %}
 

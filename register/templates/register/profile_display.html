@@ -1,7 +1,94 @@
 {% extends 'register/base.html' %}
-
+{% load static %}
 {% block display %}
-  <!--? displaying user profile -->
-  <p>profile display</p>
+<div class="main main-raised" style='margin:6rem 8rem 4rem 8rem;'>
+    <div class="profile-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ml-auto mr-auto">
+                   <div class="profile">
+                        <div class="avatar">
+                            
+                            {% if user_profile.profil_pic %}
+                            <img src="{{ user_profile.profil_pic.url }}" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                            {% else %}
+                            <img src="{% static 'images/man.png' %}" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                            {% endif %}
+                                
+                            
+                        </div>
+                        <div class="name">
+                            <h2 class="title">{{ user_profile }}</h3>
+                            <h3>
+                            {% if user_profile.position %}
+                            {{ user_profile.position }}
+                            {% else %}
+                            Chercheur
+                            {% endif %}
+                            </h6>
+                            <h6>
+                                {{ user_profile.domaine }}
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="description text-center" style="padding-bottom: 4rem;">
+                <p>{{ user_profile.bio }}</p>
+            </div>
+           
+<div class="table container" style="padding-top: 0.5rem!important;padding-bottom: 2rem!important;">
+    <form class="form-inline active-cyan-4">
+      {% csrf_token %}
+      <input class="form-control form-control-sm mr-10 w-75" type="text" placeholder="Search"
+        aria-label="Search" style="margin: 15px!important;" id="search_input">
+      <i class="fas fa-search" aria-hidden="true"></i>
+    </form>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="table-info">
+            <th data-column="title" data-order="desc">Title</th>
+            <th data-column="type" data-order="desc">Type</th>
+            <th data-column="authors" data-order="desc">Authors</th>
+            <th data-column="timestamp" data-order="desc">Published on</th>
+            <th data-column="link" data-order="desc">Link</th>
+          </tr>
+        </thead>
+        <tbody id="PostsTable" api="/user_posts/{{ user_profile.pk }}/">
+        </tbody>
+      </table>
+      
+
+    <!-- creating pages as get requests using pagination -->
+        {% if posts.has_other_pages %}
+        <ul class="pagination">
+          {% if posts.has_previous %}
+            <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+          {% endif %}
+          {% for i in posts.paginator.page_range %}
+            {% if posts.number == i %}
+              <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+              <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if posts.has_next %}
+            <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+          {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+          {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+    </div>
+    </div>
+</div>
 {% endblock display %}
-    
+
+
+{% block table_script %}
+<script src="{% static '/js/table.js' %}"></script>
+{% endblock table_script %}
+  
