@@ -71,11 +71,13 @@ def signup(request):
             for msg in user_form.error_messages:
                 messages.error(request,
                 f"{msg}: {user_form.error_messages[msg]}")
-            
-            for msg in user_form.error_messages:
-                messages.error(request,
-                f"{msg}: {user_form.error_messages[msg]}")
-
+                
+            try:
+                for msg in profile_form.error_messages:
+                    messages.error(request,
+                    f"{msg}: {user_form.error_messages[msg]}")
+            except AttributeError:
+                pass
     else:
         user_form = UserCreationForm()
         user_extras = UserExtrasForm()

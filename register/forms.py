@@ -7,9 +7,6 @@ class AuthenticationForm(forms.Form):
     Base class for authenticating users. Extend this to get a form that accepts
     username/password logins.
 
-    <input class="input100" type="password" name="pass" placeholder="Password">
-    <input class="input100" type="text" name="email" placeholder="Email">
-
     """
     username = UsernameField(widget=forms.TextInput(attrs={
         'class':"input100",
@@ -27,8 +24,12 @@ class AuthenticationForm(forms.Form):
             'autocomplete': 'current-password'}),
     )
 
+#? UserCreationForm is also used
 
 class UserForm(forms.ModelForm):
+    # <input class="input100" type="password" name="pass" placeholder="Password">
+    # <input class="input100" type="text" name="email" placeholder="Email">
+    # using JS to set classes for now need to read django source code for form_classes :/
     class Meta:
         model = User
         fields = ('username','first_name','last_name','email')

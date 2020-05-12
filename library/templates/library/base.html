@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universias</title>
-    
+    <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
@@ -18,9 +18,8 @@
     <!-- other CSS -->
     
     {% block item_css %}
-      
     {% endblock item_css %}
-      
+    <!-- login and sign up have same css -->
     {% block login_css %}
     {% endblock login_css %}
 
@@ -58,7 +57,7 @@
     
     {% include 'library/includes/footer.html' %}
     <!-- Jqurey minified-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

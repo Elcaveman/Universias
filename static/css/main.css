@@ -4,14 +4,17 @@
 	background-image:url("../images/univ.jpg");
 	background-attachment: fixed;
 	background-repeat:no-repeat; 
-	background-size: 100% 760px;
+	background-size: cover;
 	color: white;
-	height:700px;}
+	height:92vh;}
 .title{
   padding-top:10%;
 }
 header{
-  font-size:70px;
+  font-size:3.5rem;
+  margin-top:3rem;
+  margin-bottom:2rem;
+
 }
 h2,p{
   color:#363F5A;
@@ -134,7 +137,6 @@ a.hover-reverse:hover, a.hover-reverse:focus, a.hover-reverse:active {
 	padding-left: 5px;
 }
 .footer{
-	padding-top: 70px;
 	height:300px;
 }
 .separetor-danger{
@@ -149,7 +151,6 @@ a.hover-reverse:hover, a.hover-reverse:focus, a.hover-reverse:active {
 	text-align: left;
 	font: normal 16px sans-serif;
 
-	padding: 45px 50px;
 }
 
 .footer-distributed .footer-left p{
@@ -177,7 +178,8 @@ a.hover-reverse:hover, a.hover-reverse:focus, a.hover-reverse:active {
 
 .footer-distributed .footer-right{
 	float: right;
-	margin-top: 6px;
+  margin-top: 3rem;
+  margin-right: 1rem; 
 	max-width: 180px;
 }
 
@@ -299,4 +301,13 @@ a.hover-reverse:hover, a.hover-reverse:focus, a.hover-reverse:active {
     -webkit-transform: translateY(0px);
             transform: translateY(0px);
   }
+}
+.ico{
+  width: 80px;
+  height: 50px;
+}
+.x2{
+  width: 100px;
+  height: 100px;
+  margin: 1rem 1rem 0 1rem;
 }
