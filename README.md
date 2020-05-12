@@ -27,7 +27,7 @@ To run the server make sure you're in the root directory of the project
 ```bash
 py manage.py runserver
 ```
-
+Open your Browser and connect to [localhost:8000](http://localhost:8000/)
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
