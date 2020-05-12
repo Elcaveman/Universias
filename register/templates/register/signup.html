@@ -38,15 +38,16 @@
                         <span class="lnr lnr-user"></span>
                     </span>
                 </div>
-
-                <div class="wrap-input100 validate-input m-b-16">
-                    <!-- <input class="input100" type="password" name="pass" placeholder="Password"> -->
-                    {{ user_form.password1 }}
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                        <span class="lnr lnr-lock"></span>
-                    </span>
-                </div>
+                    <div class="wrap-input100 validate-input m-b-16">
+                        <!-- <input class="input100" type="password" name="pass" placeholder="Password"> -->
+                        {{ user_form.password1 }}
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <span class="lnr lnr-lock"></span>
+                        </span>
+                    </div>
+                    <small class="form-text text-muted">{{ user_form.password1.help_text }}</small>
+               
                 <div class="wrap-input100 validate-input m-b-16">
                     <!-- <input class="input100" type="password" name="pass" placeholder="Password"> -->
                     {{ user_form.password2 }}
@@ -75,6 +76,8 @@
                 <div class="wrap-input100 validate-input m-b-16">
                     <!-- <input class="input100" type="password" name="pass" placeholder="Password"> -->
                     {{ user_extras.email }}
+                    
+
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
                         <span class="lnr lnr-envelope"></span>
@@ -89,14 +92,7 @@
                     <span class="focus-input100"></span>
                 </div>
                 {% endfor %}
-                    
-                <div class="contact100-form-checkbox m-l-4">
-                    <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                    <label class="label-checkbox100" for="ckb1">
-                        Remember me
-                    </label>
-                </div>
-                
+                                    
                 <div class="container-login100-form-btn p-t-25">
                     <button class="login100-form-btn" type="submit">
                         Sign up!
@@ -118,6 +114,40 @@
         
 
 {% block login_scripts %}
+
+    
+    {% for field in user_form %}
+        {% if field.errors %}
+            {% for error in field.errors %}
+            <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:10000})</script>
+        {% endfor %}
+        {% else %}
+    
+        {% endif %}
+    {% endfor %}
+
+    {% for field in user_extras %}
+        {% if field.errors %}
+            {% for error in field.errors %}
+            <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:10000})</script>
+        {% endfor %}
+        {% else %}
+    
+        {% endif %}
+    {% endfor %}
+
+    {% for field in profile_form %}
+        {% if field.errors %}
+            {% for error in field.errors %}
+            <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:10000})</script>
+        {% endfor %}
+        {% else %}
+    
+        {% endif %}
+    {% endfor %}
+        
+    
+        
     <script>
         
         const fields = document.querySelectorAll('input');

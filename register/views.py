@@ -56,28 +56,21 @@ def signup(request):
             user.last_name = user_extras.cleaned_data['last_name']
             user.email = user_extras.cleaned_data['email']
 
+            user.save()
+
             profile_form = ProfileForm(request.POST, instance=user.profile)  # Reload the profile form with the profile instance
-            profile_form.full_clean()# Manually clean the form this time. It is implicitly called by "is_valid()" method
+            #profile_form.full_clean()# Manually clean the form this time. It is implicitly called by "is_valid()" method
             profile_form.save()#Gracefully save the form
 
             raw_password = user_form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             messages.success(request,"New Account Created!")
-            messages.info(request,f"Welcome {user.first_name}!")
+            messages.info(request,f"Welcome {user}!")
             login(request, user)
             return redirect('/')
         else:
-            #handling the errors with the built in django messages!
-            for msg in user_form.error_messages:
-                messages.error(request,
-                f"{msg}: {user_form.error_messages[msg]}")
-                
-            try:
-                for msg in profile_form.error_messages:
-                    messages.error(request,
-                    f"{msg}: {user_form.error_messages[msg]}")
-            except AttributeError:
-                pass
+            #handling the errors with the built in django messages!#! with jinja2
+            pass
     else:
         user_form = UserCreationForm()
         user_extras = UserExtrasForm()

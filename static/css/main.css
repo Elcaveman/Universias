@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Pacifico|Righteous|Roboto+Condensed|Ubuntu&display=swap');
 
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+}
+
 #landing{
 	background-image:url("../images/univ.jpg");
 	background-attachment: fixed;
@@ -17,8 +22,8 @@ header{
 
 }
 h2,p{
+  font-family:Poppins-Regular;
   color:#363F5A;
-  font-family:"Roboto+Condensed";
   font-weight:bold;
 }
 .tag{

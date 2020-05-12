@@ -18,8 +18,8 @@ class Profile(models.Model):
     position = models.CharField(max_length=50, choices=POSITIONS,blank=True)
     domaine = models.CharField("Domaine of expertise", max_length=50)
 
-    labo = models.ForeignKey("library.Laboratory" , on_delete=models.SET_NULL , null = True)
-    team = models.ForeignKey("library.Team" , on_delete=models.SET_NULL,null = True)
+    labo = models.ForeignKey("library.Laboratory" , on_delete=models.SET_NULL , null = True , blank=True)
+    team = models.ForeignKey("library.Team" , on_delete=models.SET_NULL,null = True , blank=True)
   
     bio = models.TextField("Bio :", blank=True , help_text = "Say something about yourself")
 
