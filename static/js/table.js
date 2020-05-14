@@ -5,7 +5,14 @@ var barray=[]
 const table = document.getElementById('PostsTable')
 const APIurl= table.attributes['api'].value
 const user = table.attributes['user'].value
-
+function get_pic(pic){
+    if (pic){
+        return `/media/${pic[0]['profil_pic']}`
+    }
+    else{
+        return `/static/images/man.png/`
+    }
+}
 $.ajax({
     method:'GET',
     url:APIurl,
@@ -27,10 +34,12 @@ function populate_table(array){
     }
     for (let i =0 ; i<array.length ; i++){
         row_data = array[i];
+        console.log(row_data)
         rowHTML=`<tr>
         <td>${row_data.title}</td>
         <td>${row_data.pub_type}</td>
-        <td>${row_data.owner}</td>
+        <td><a href="/profile/${row_data.owner}">
+        <img src="${get_pic(row_data.pic)}" alt="" class="miniprofile image-fluid" load='lazy'></a></td>
         <td>${row_data.timestamp}</td>
         <td>
             <a href="/posts/${row_data.id}">
@@ -69,10 +78,10 @@ const searchbar = document.querySelector("#search_input");
 
 searchbar.addEventListener("keyup",(event)=>{
     let filter_word = searchbar.value.toLowerCase();
-    //add filter by drop menu to chose 
+    //add filter by drop menu to chose
     let new_array = create_filtered_array(array , 'title' , filter_word);
     populate_table(new_array);
-    
+
 }
 )
 

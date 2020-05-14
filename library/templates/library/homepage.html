@@ -33,7 +33,7 @@
             </div>
             <div class="probootstrap-card-text">
               <h2 class="probootstrap-card-heading">Chercheurs</h2>
-              <p>user.count</p>
+              <p>{{user_count}}</p>
               <a href="/teams/"><button class="btn btn-info btn-animate">Savoir plus</button></a>
             </div>
           </div>
@@ -45,7 +45,7 @@
             </div>
             <div class="probootstrap-card-text">
               <h2 class="probootstrap-card-heading">Publications</h2>
-              <p>pub.count</p>
+              <p>{{posts_count}}</p>
               <a href="/posts/"><button class="btn btn-info grad">Savoir plus</button></a>
             </div>
           </div>
@@ -57,7 +57,7 @@
             </div>
             <div class="probootstrap-card-text">
               <h2 class="probootstrap-card-heading">Laboratoire</h2>
-              <p>labo.count</p>
+              <p>{{labs_count}}</p>
               <a href="/labs/"><button class="btn btn-info grad">Savoir plus</button></a>
             </div>
           </div>
@@ -104,38 +104,36 @@
     <!--<h2><i><strong>Contributors</strong></i></h2>  -->
     <br>
   <div class="row">
+    
+    {% if contribs %}
+        
+    {% for user in contribs|slice:":6" %}
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 probootstrap-animate">
-          <div class="service text-center">
-           <div class="icon"><img class="icon" src="{% static '/images/man.png' %}"></div>
-            <h2 class="heading">Prof name</h2>
-            <a href=""><h4>Bio</h4></a>
-              
-            <a href=""><h5>Publication</h5></a>
-          </div>
+      <div class="service text-center">
+       <div class="icon">
+         
+         {% if user.profil_pic %}
+         <img class="icon" src="{{ user.profil_pic.url }}">
+         {% else %}
+         <img class="icon" src="{% static '/images/man.png' %}">
+         {% endif %}
+           
+        
+      </div>
+        <h2 class="heading">{{user}}</h2>
+        <a href=""><h4>{{ user.domaine}}</h4></a>
+          
+        <a href="/profile/{{ user.pk }}"><button class="btn btn-secondary">Profile</button></a>
+      </div>
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  probootstrap-animate">
-          <div class="service text-center">
-           <div class="icon"><img class="icon" src="{% static '/images/man.png' %}"></div>
-            <h2 class="heading">Prof name</h2>
-            <a href=""><h4>Bio</h4></a>
-              
-            <a href=""><h5>Publication</h5></a>
-            
-          </div>
-    </div>
-     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 probootstrap-animate">
-          <div class="service text-center" >
-            <div class="icon"><img class="icon" src="{% static '/images/man.png' %}"></div>
-            <h2 class="heading">Prof name</h2>
-            <a href=""><h4>Bio</h4></a>
-              
-            <a href=""><h5>Publication</h5></a>
-          </div>
-        </div>
+    {% endfor %}
+    {% else %}
+      <p>No contributors</p>
+    {% endif %}
   </div>
+</div>  
+</section>
 
-  </section>
-</div>
 
 {% endblock home %}
     

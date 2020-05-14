@@ -27,7 +27,12 @@ def postsAPI(request):
     posts_queryset = models.Post.objects.all().values(
         'id','title','pub_type','owner','timestamp'
     )
+    
     posts_list = list(posts_queryset)
+    for i in range(len(posts_list)):
+        posts_list[i]['pic'] = list(models.Profile.objects.filter(user__pk = posts_list[i]['owner']).values(
+            'profil_pic'
+        ))
     #we can pass a non dict response by setting safe to FALSE!
     #why we call it safe? welp
     #?Before ECMAScript5 it was possible to poison the JavaScript Array constructor.
@@ -38,14 +43,23 @@ def user_posts(request , user_id):
     posts_list = list(models.Post.objects.filter(authors__pk = user_id).values(
         'id','title','pub_type','owner','timestamp'
     ))
+    for i in range(len(posts_list)):
+        posts_list[i]['pic'] = list(models.Profile.objects.filter(user__pk = posts_list[i]['owner']).values(
+            'profil_pic'
+        ))
     return JsonResponse(posts_list, safe = False)
 
 #views
 def home(request):
-    rp = models.Post.objects.filter(
-        timestamp__gte=timezone.now() - datetime.timedelta(days=7))
+    contribs = models.Profile.objects.filter(position = "LC")
+    user_count = models.Profile.objects.count()
+    labs_count = models.Laboratory.objects.count()
+    posts_count = models.Post.objects.count()
     context = {
-        'recent_posts': rp,
+        'contribs': contribs,
+        'user_count': user_count,
+        'labs_count': labs_count,
+        'posts_count' : posts_count,
     }
     return render(request, 'library/homepage.html', context)
 @login_required
