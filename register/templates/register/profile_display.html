@@ -43,12 +43,14 @@
             </div>
            
 <div class="table container" style="padding-top: 0.5rem!important;padding-bottom: 2rem!important;">
-    <form class="form-inline active-cyan-4">
-      {% csrf_token %}
+    <div style="display:flex;">
+    <form class="form-inline active-cyan-4" style="flex:90%;">
       <input class="form-control form-control-sm mr-10 w-75" type="text" placeholder="Search"
         aria-label="Search" style="margin: 15px!important;" id="search_input">
-      <i class="fas fa-search" aria-hidden="true"></i>
+      <i class="btn fas fa-search" aria-hidden="true"></i>
     </form>
+    <a href="/create_post/"><button class="btn bg-transparent inline m-1" name="newpost"><i class="fas fa-pen"></i></button></a>
+  </div>
       <table class="table table-bordered">
         <thead>
           <tr class="table-info">

@@ -142,7 +142,8 @@ a.hover-reverse:hover, a.hover-reverse:focus, a.hover-reverse:active {
 	padding-left: 5px;
 }
 .footer{
-	height:300px;
+  height:300px;
+  
 }
 .separetor-danger{
   color:grey;
@@ -154,7 +155,12 @@ a.hover-reverse:hover, a.hover-reverse:focus, a.hover-reverse:active {
 	box-sizing: border-box;
 	width: 100%;
 	text-align: left;
-	font: normal 16px sans-serif;
+  font: normal 16px sans-serif;
+  /* position: fixed; */
+  left: 0;
+  bottom: 0;
+
+
 
 }
 

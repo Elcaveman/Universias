@@ -279,3 +279,23 @@ footer p a:hover {
     color: #9f26aa;
     text-decoration: none;
 }
+button[name~=newpost]{
+    position: relative;
+}
+button[name~=newpost]::before{
+    content: "New Post";
+    position: absolute;
+    background-color: #4286f4;
+    display: none;
+    padding: 1em 3em;;
+    color: whitesmoke;
+    border-radius: 5px;
+    font-size: 0.75em;
+    left:0;
+    bottom: 100%;
+    white-space: nowrap;
+  }
+
+button[name~=newpost]:hover::before {
+    display: block;
+  }

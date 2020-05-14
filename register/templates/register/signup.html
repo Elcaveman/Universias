@@ -24,7 +24,7 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30" style="width: 70vw; min-width:450px ;max-width:700px">
-            <form class="login100-form validate-form" method="POST">
+            <form class="login100-form validate-form" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <span class="login100-form-title p-b-55">
                     Sign up
@@ -122,14 +122,14 @@
             <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:10000})</script>
         {% endfor %}
         {% else %}
-    
+            {#nothing lol}
         {% endif %}
     {% endfor %}
 
     {% for field in user_extras %}
         {% if field.errors %}
             {% for error in field.errors %}
-            <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:10000})</script>
+            <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:15000})</script>
         {% endfor %}
         {% else %}
     
@@ -139,7 +139,7 @@
     {% for field in profile_form %}
         {% if field.errors %}
             {% for error in field.errors %}
-            <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:10000})</script>
+            <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:15000})</script>
         {% endfor %}
         {% else %}
     
@@ -160,9 +160,14 @@
             // 6 is the profile pic thing
             elt.className="input100";
             elt.setAttribute('placeholder',list[count]);
+            if (list[count]=='Domaine'){
+                elt.parentElement.innerHTML += `<span class="symbol-input100">
+                        <i class="fas fa-meteor"></i>
+                    </span>`
+            }
           }
-          else{
-            //styling here
+          else {
+            //add style
           }
         });
         const textarea = document.querySelector('textarea')

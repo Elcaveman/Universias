@@ -1,0 +1,119 @@
+ 
+      .containe {
+        padding-top: 5% !important;
+        position: relative;
+        border-radius: 5px;
+        
+        padding: 20px 0 200px 0;
+        
+      } 
+      
+      
+      /* Clear floats after the columns */
+      
+      
+      .conte {
+        width:50%;
+        
+        margin: 0 auto;
+        background-color:#0e0e0ede;
+        position: center;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px 0 grey;
+        justify-content: center;
+        text-align: center;
+        border: 2px solid #7b424f85;
+      }
+      @media screen and (max-width: 900px) {
+        .cont {
+        width:100%;
+        }
+        }
+      .conte h1 {
+        padding-top:40px;
+        font-size: 40px;
+       padding-bottom: 40px;
+        color:white;
+       font-family: 'Oswald', sans-serif;
+        
+        
+      }
+      h2{
+        color:#7a898d;
+      }
+      h5{
+        color: #e2ecf6;
+      }
+      h4, p{
+        color: white;
+        font-family: 'Quicksand', sans-serif;
+      }
+      .text{
+        color: grey;
+        padding-right: 120px;
+      }
+      h6{
+       
+        color:grey;
+        border-bottom: 1px solid #dadada;
+        line-height: 0.1em !important;
+        margin: 10px 0 20px;
+      }
+      h6 span{
+       
+       background:#282b2b !important;
+        padding: 0 10px;
+        font-size: 0.9rem;
+      }
+    
+      .tbox {
+
+        width: 260px;
+        height: 50px;
+        background: #f1f1f1b3;
+        margin: 5px auto;
+        border: 2px solid rgb(91, 235, 187);
+        border-radius: 10px;
+      }
+      .tbox:hover {
+        width: 280px;
+        border: 2px solid #79354585;
+      }
+      .tbox input {
+
+        background: none;
+        border: none;
+        outline: none;
+        text-align: center;
+        width: 200px;
+        line-height: 37px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 14px;
+        color: rgb(56, 27, 27);
+      }
+      .tbox input[type="text"],
+      .tbox input[type="password"] :focus {
+        width: 250px;
+      }
+      .butn {
+        width: 180px;
+        height: 40px;
+        background: rgb(151, 231, 205) !important;
+        border-radius: 10px;
+        margin: 14px auto;
+        display: block;
+        font-family: "Montserrat", sans-serif;
+        font-size: 16px;
+        border: none;
+        color: aliceblue;
+        cursor: pointer;
+      }
+      
+      .butn:hover {
+        box-shadow: 0 0 5px rgb(91, 235, 187), 0 0 5px rgb(91, 235, 187),
+          0 0 50px rgb(91, 235, 187), 0 0 10px rgb(91, 235, 187);
+      }
+      
+    
+     
+  

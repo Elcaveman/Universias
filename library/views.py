@@ -11,8 +11,10 @@ from django.utils import timezone
 from django.http import Http404,HttpResponse
 from django.shortcuts import render,redirect
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 from django.template import RequestContext
+from .forms import PostForm
 import json
 
 handler404 = "library.views.view_404"
@@ -23,7 +25,7 @@ handler500 = "library.views.view_500"
 def postsAPI(request):
     #use values to convert to JSON
     posts_queryset = models.Post.objects.all().values(
-        'id','title','pub_type','authors','timestamp'
+        'id','title','pub_type','owner','timestamp'
     )
     posts_list = list(posts_queryset)
     #we can pass a non dict response by setting safe to FALSE!
@@ -93,3 +95,44 @@ def view_404(request):
 
 def view_500(request):
     return render(request , 'library/500.html')
+
+
+@login_required
+def create_post_view(request):
+    if request.POST:
+        form = PostForm(request.POST , request.FILES)
+        if form.is_valid():
+            #create the post instance but do not save it yet since we need to add an owner
+            post_object = form.save(commit=False)
+            post_object.owner = request.user.profile
+            post_object.save()
+            #an owner is an author aswell
+            #we add it this late to avoid ValueError because the object
+            #needs to have a value for field "id" before this many-to-many relationship can be used.
+            post_object.authors.add(request.user.profile)
+            messages.success(request , "Post created successfully")
+            return redirect('/profile/')
+        else:
+            if form.get('error_messages',None):
+                for msg in form.error_messages:
+                    messages.error(request , f"{msg}")
+        
+    else:
+        form = PostForm()
+    return render(request , 'library/add_post.html' ,{'form':form})
+
+@login_required
+def delete_post_view(request , post_id):
+    try:
+        post = models.Post.objects.filter(id=post_id)[0]
+    except:
+        messages.error(request,'This post doesn\'t exist')
+        return redirect('/profile/')
+    if request.user.pk == post.owner.pk:
+        #? what's the diference between clear and remove?
+        post.delete()
+        messages.success(request,'Post deleted sucessfully')
+    else:
+        messages.error(request,'You can\'t delete a post that isn\'t your own!')
+    return redirect('/profile/')
+    
