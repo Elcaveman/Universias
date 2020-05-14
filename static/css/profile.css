@@ -295,7 +295,35 @@ button[name~=newpost]::before{
     bottom: 100%;
     white-space: nowrap;
   }
-
+.bis{
+    margin:6rem 8rem 4rem 8rem;
+}
 button[name~=newpost]:hover::before {
     display: block;
+  }
+.marge{
+    margin: 15px!important;
+}
+
+  @media only screen and (max-width: 768px) {
+    .bis{
+        font-size: 14px;
+    }
+
+    .main{
+      margin: 3rem 0;
+      z-index: 4;
+    }
+    .main-raised{
+        border-radius: 6px;
+        box-shadow: 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+
+    }
+    .marge{
+        margin: 0!important;
+    }
+    button[name~=newpost]::before{
+        padding:0rem;
+        max-width: 50px;
+    }
   }

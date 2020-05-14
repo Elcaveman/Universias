@@ -36,7 +36,7 @@ def postsAPI(request):
 @login_required
 def user_posts(request , user_id):
     posts_list = list(models.Post.objects.filter(authors__pk = user_id).values(
-        'id','title','pub_type','authors','timestamp'
+        'id','title','pub_type','owner','timestamp'
     ))
     return JsonResponse(posts_list, safe = False)
 

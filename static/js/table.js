@@ -24,7 +24,6 @@ function populate_table(array){
             <button class="btn btn-danger hidden">Delete</button></a>`
         }
         return ''
-
     }
     for (let i =0 ; i<array.length ; i++){
         row_data = array[i];

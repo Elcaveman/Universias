@@ -208,7 +208,9 @@ a.hover-reverse:hover, a.hover-reverse:focus, a.hover-reverse:active {
 
 	margin-left: 3px;
 }
-
+.bis{
+  padding-top: 15px!important;
+}
 /* If you don't want the footer to be responsive, remove these media queries */
 
 @media (max-width: 600px) {
@@ -225,7 +227,10 @@ a.hover-reverse:hover, a.hover-reverse:focus, a.hover-reverse:active {
 
 	.footer-distributed .footer-left p.footer-links{
 		line-height: 1.8;
-	}
+  }
+  .bis{
+    font-size: 14px;
+  }
 }
 
 .btn:link,

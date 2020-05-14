@@ -4,7 +4,7 @@
 <link href="{% static '/css/profile.css' %}" rel="stylesheet">
 {% endblock profile_css %}
 {% block display %}
-<div class="main main-raised" style='margin:6rem 8rem 4rem 8rem;'>
+<div class="main main-raised bis">
     <div class="profile-content">
         <div class="container">
             <div class="row">
@@ -45,8 +45,8 @@
 <div class="table container" style="padding-top: 0.5rem!important;padding-bottom: 2rem!important;">
     <div style="display:flex;">
     <form class="form-inline active-cyan-4" style="flex:90%;">
-      <input class="form-control form-control-sm mr-10 w-75" type="text" placeholder="Search"
-        aria-label="Search" style="margin: 15px!important;" id="search_input">
+      <input class="form-control form-control-sm mr-10 w-75 marge" type="text" placeholder="Search"
+        aria-label="Search" id="search_input">
       <i class="btn fas fa-search" aria-hidden="true"></i>
     </form>
     <a href="/create_post/"><button class="btn bg-transparent inline m-1" name="newpost"><i class="fas fa-pen"></i></button></a>
@@ -54,14 +54,14 @@
       <table class="table table-bordered">
         <thead>
           <tr class="table-info">
-            <th data-column="title" data-order="desc">Title</th>
-            <th data-column="type" data-order="desc">Type</th>
-            <th data-column="authors" data-order="desc">Authors</th>
-            <th data-column="timestamp" data-order="desc">Published on</th>
-            <th data-column="link" data-order="desc">Link</th>
+            <th data-column="title" data-order="desc" scope="col">Title</th>
+            <th data-column="type" data-order="desc" scope="col">Type</th>
+            <th data-column="authors" data-order="desc" scope="col">Owner</th>
+            <th data-column="timestamp" data-order="desc" scope="col">Published on</th>
+            <th data-column="link" data-order="desc" scope="col">Link</th>
           </tr>
         </thead>
-        <tbody id="PostsTable" api="/user_posts/{{ user_profile.pk }}/">
+        <tbody id="PostsTable" api="/user_posts/{{ user_profile.pk }}/" user="{{ user.pk }}">
         </tbody>
       </table>
       
