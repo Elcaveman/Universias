@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
-          <h1>Title of the research</h1>
+          <h1>{{ post.title }}</h1>
           <hr>
           <h3 style="color:grey"><strong><i>{{ post.description }}</i></strong></h3>
           <p style="font-size:18px;color:white ;padding-top: 50px">{{ post.description }}</p>
@@ -38,8 +38,8 @@
         <div class="col col-lg-4">
           <div class="probootstrap-card text-center probootstrap-animate">
             
-            {% if author.profile_pic %}
-            <img src="{{ author.profile_pic.url }}" class="svg">
+            {% if author.profil_pic %}
+            <img src="{{ author.profil_pic.url }}" class="svg">
             {% else %}
             <img src="{% static 'images/man.png' %}" class="svg">
             {% endif %}

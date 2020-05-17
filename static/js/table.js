@@ -5,15 +5,32 @@ var barray=[]
 const table = document.getElementById('PostsTable')
 const APIurl= table.attributes['api'].value
 const user = table.attributes['user'].value
-function get_pic(pic){
-    if (pic){
-        return `/media/${pic[0]['profil_pic']}`
+
+function authors_section_HTML(authors_array){
+    function img_handler(string){
+        if (string ===""){
+            return '/static/images/man.png';
+        }
+        else{
+            return "/media/"+string;
+        }
     }
-    else{
-        return `/static/images/man.png/`
+    //the form of the array is:
+    //[ {"pk": 36, "profil_pic": "name.jpg"}...]
+    let innerHTML = "<div style=\'display:flex\'>";
+    for (let i=0 ; i<authors_array.length ; i++){
+        innerHTML += `
+            <a href="/profile/${authors_array[i].pk}/">
+            <img src="${img_handler(authors_array[i].profil_pic)}" alt="" class="miniprofile" load='lazy'></a>
+        `;
     }
+    innerHTML += "</div>"
+    return innerHTML;
 }
 $.ajax({
+    //form of the api response:
+    //{"id": 18, "title": "test", "pub_type": "Doc", "owner": 10, 
+    //"timestamp": "2020-05-16T03:14:45.571Z", "authors": [{"pk": 36, "profil_pic": ""},..]
     method:'GET',
     url:APIurl,
     success:(response)=>{
@@ -24,6 +41,7 @@ $.ajax({
 function populate_table(array){
     const table = document.getElementById("PostsTable")
     //let's clean the table first!
+    // need to define a limit kinda like the facbook thing
     table.innerHTML = '';
     function delete_btn_html(user1 , user2 ,row_data_id){
         if (user1==user2){
@@ -38,14 +56,15 @@ function populate_table(array){
         rowHTML=`<tr>
         <td>${row_data.title}</td>
         <td>${row_data.pub_type}</td>
-        <td><a href="/profile/${row_data.owner}">
-        <img src="${get_pic(row_data.pic)}" alt="" class="miniprofile image-fluid" load='lazy'></a></td>
+        <td>${authors_section_HTML(row_data.authors)}</td>
         <td>${row_data.timestamp}</td>
         <td>
             <a href="/posts/${row_data.id}">
                 <button class="btn btn-info m-1">Info</button>
-            </a>`+delete_btn_html(user , row_data.owner , row_data.id)
-        +"</td></tr>";
+            </a>
+            ${delete_btn_html(user , row_data.owner , row_data.id)}
+        </td>
+        </tr>`;
         table.innerHTML += rowHTML;
     }
     barray = array;

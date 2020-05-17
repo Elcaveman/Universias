@@ -38,7 +38,7 @@
 <body class="profile-page">
     {% include 'library/includes/navbar.html' %}
     {% include 'register/messages.html' %}
-
+  <div class="wrapper">
     {% block home %}
     {% endblock home %}
         
@@ -61,6 +61,7 @@
     {% endblock display %}
     
     {% include 'library/includes/footer.html' %}
+  </div>
     <!-- Jqurey minified-->
     <script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
     <!-- Compiled and minified JavaScript -->

@@ -24,15 +24,19 @@ handler500 = "library.views.view_500"
 @login_required
 def postsAPI(request):
     #use values to convert to JSON
-    posts_queryset = models.Post.objects.all().values(
-        'id','title','pub_type','owner','timestamp'
-    )
+    posts_queryset = models.Post.objects.all()
     
-    posts_list = list(posts_queryset)
+    posts_list = list(posts_queryset.values(
+        'id','title','pub_type','owner','timestamp'
+    ))
+    #let's add the authors and their profile pics
     for i in range(len(posts_list)):
-        posts_list[i]['pic'] = list(models.Profile.objects.filter(user__pk = posts_list[i]['owner']).values(
-            'profil_pic'
-        ))
+        author_list = list(posts_queryset[i].authors.all())
+        posts_list[i]['authors'] = list(
+            models.Profile.objects.filter(
+                user__in = author_list
+            ).values('pk','profil_pic')
+        )
     #we can pass a non dict response by setting safe to FALSE!
     #why we call it safe? welp
     #?Before ECMAScript5 it was possible to poison the JavaScript Array constructor.
@@ -40,13 +44,22 @@ def postsAPI(request):
 
 @login_required
 def user_posts(request , user_id):
-    posts_list = list(models.Post.objects.filter(authors__pk = user_id).values(
+    #only difference between postsAPI and user_posts is the args + this line
+    posts_queryset = models.Post.objects.filter(authors__pk = user_id)
+    posts_list = list(posts_queryset.values(
         'id','title','pub_type','owner','timestamp'
     ))
+    #let's add the authors and their profile pics
     for i in range(len(posts_list)):
-        posts_list[i]['pic'] = list(models.Profile.objects.filter(user__pk = posts_list[i]['owner']).values(
-            'profil_pic'
-        ))
+        author_list = list(posts_queryset[i].authors.all())
+        posts_list[i]['authors'] = list(
+            models.Profile.objects.filter(
+                user__in = author_list
+            ).values('pk','profil_pic')
+        )
+    #we can pass a non dict response by setting safe to FALSE!
+    #why we call it safe? welp
+    #?Before ECMAScript5 it was possible to poison the JavaScript Array constructor.
     return JsonResponse(posts_list, safe = False)
 
 #views

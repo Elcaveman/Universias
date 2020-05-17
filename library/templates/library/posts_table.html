@@ -2,7 +2,7 @@
 {% load static %}
 {% block posts_table %}
  
-<div class="table container" style="padding-top: 15px!important;">
+<div class="table container" style="padding-top: 15px!important;min-height: 80vh;">
   <form class="form-inline active-cyan-4 bis">
     {% csrf_token %}
     <input class="form-control form-control-sm mr-10 w-75" type="text" placeholder="Search"
@@ -14,7 +14,7 @@
         <tr class="table-info">
           <th data-column="title" data-order="desc" scope="col">Title</th>
           <th data-column="type" data-order="desc" scope="col">Type</th>
-          <th data-column="authors" data-order="desc" scope="col">Owner</th>
+          <th data-column="authors" data-order="desc" scope="col">Authors</th>
           <th data-column="timestamp" data-order="desc" scope="col">Published on</th>
           <th data-column="link" data-order="desc" scope="col">Link</th>
         </tr>

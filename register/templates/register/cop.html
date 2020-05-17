@@ -1,15 +1,76 @@
 
 
 
-<!-- <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% if messages %}
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
+
+
+
+
+
+{% extends 'library/base.html' %}
+{% load static %}
+{% block content %}
+    {% if validlink %}
+        <h5>Please enter your new password twice so we </h5>
+        <h5>can verify you typed it in correctly.</h5>
+        <br>
+        <form method="post">
+            {% csrf_token %}
+            <label for="id_new_password1" class="text">'New password:</label>
+            <div class="tbox">
+                {{ form.new_password1 }}
+            </div>
+            <label for="id_new_password2" class="text">Confirm password:</label>
+            <div class="tbox">
+                {{ form.new_password2 }}
+            </div>
+        
+            <input class="butn" type="submit" name="" value="Change Password">
+            <br>
+        </form>
+
+    {% else %}
+
+        <p>The password reset link was invalid, possibly because it has already been used.  Please request a new password reset.</p>
+        <a href="/reset_password/"><button >Re-send email</button></a>
+
+
     {% endif %}
-    <button type="submit">Signin!</button>
+
+{% endblock %}
+
+
+{% block content_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_reset.css' %}">
+{% endblock content_css %}
+
+{% block content_script %}
+    
+{% endblock content_script %}
+    
+    
+
+{% block c %}
+    
+
+
+<p>Please enter your new password twice so we can verify you typed it in correctly.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <fieldset class="module aligned">
+        <div class="form-row field-password1">
+            {{ form.new_password1.errors }}
+            <label for="id_new_password1">'New password:</label>
+            {{ form.new_password1 }}
+        </div>
+        <div class="form-row field-password2">
+            {{ form.new_password2.errors }}
+            <label for="id_new_password2">Confirm password:</label>
+            {{ form.new_password2 }}
+        </div>
+        <input type="submit" value='Change my password'">
+</fieldset>
 </form>
-<p><a href="reset_password/">Forgot your password?</a></p>
-<p>Don't have an account? sign up <a href="signup/">here!</a></p> -->
+
+{% endblock c %}
+    

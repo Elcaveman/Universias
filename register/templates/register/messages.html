@@ -4,7 +4,7 @@
     {% if message.tags == 'success' %}
         <script>M.toast({html:"{{ message }}",classes:'green rounded' , displatLength:2000})</script>
     {% elif message.tags == 'error' %}
-        <script>M.toast({html:"{{ message }}",classes:'red rounded' , displatLength:10000})</script>
+        <script>M.toast({html:"{{ message }}",classes:'red rounded' , displatLength:100000})</script>
     {% else %}
         <script>M.toast({html:"{{ message }}",classes:'blue rounded' , displatLength:2000})</script>
     {% endif %}
