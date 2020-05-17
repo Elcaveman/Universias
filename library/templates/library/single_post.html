@@ -7,8 +7,7 @@
         <div class="col-lg-6">
           <h1>{{ post.title }}</h1>
           <hr>
-          <h3 style="color:grey"><strong><i>{{ post.description }}</i></strong></h3>
-          <p style="font-size:18px;color:white ;padding-top: 50px">{{ post.description }}</p>
+          <p style="font-size:18px;color:rgb(206, 206, 206) ;padding-top: 50px">{{ post.description }}</p>
           <br>
           <a href="{{ post.google_scholar }}">
             <div class="btn btn-dark"><img class="ic" src="{% static 'images/ggle.png' %}">Google scholar</div>
@@ -49,11 +48,11 @@
                 <h2>{{ author }}</h2>
                 
                 {% if author.position %}
-                <p class="title">{{ author.position }}</p>
+                <h3 class="title">{{ author.get_position_display }}</h3>
                 {% else %}
                 <p class="title">Chercheur</p>
                 {% endif %}
-                
+                <br>
                 <p>{{ author.bio|slice:100 }}</p>
                 <a href="/profile/{{ author.user.id }}"><button class="btn btn-primary">View profile</button></a>
             </div>
@@ -73,9 +72,14 @@
             <hr>
             <a href="{{ post.URL }}"><button class="btn btn-info">Click Here!</button></a>
             <br>
+            <br>
+            <h3><strong>DOI</strong></h3>
+            <hr>
+            <a href="{{ post.DOI }}"><button class="btn btn-info">Click Here!</button></a>
+            <br>
           </div>
           <div class="col col-lg-4 text-center">
-            <h3><strong>DOI</strong></h3>
+            <h3><strong>Links</strong></h3>
             <hr>
             <div class="row">
               <hr>
@@ -84,12 +88,10 @@
                 <a href="{{ post.google_scholar }}">
                   <div class="btn btn-dark"><img class="ic" src="{% static 'images/ggle.png' %}">Voir sur Google Scholar</div>
               </a>
-                
-  
+              <br><br>
               </div>
               <div class="col">
                 <h4><strong>Bibtex</h4></strong>
-                <br>
                 <a href="{{ post.bibtex }}" download>
                   <div class="btn btn-dark"><img class="ic" src="{% static 'images/ggle.png' %}">Telecharger en Bibtex!</div>
               </a>
