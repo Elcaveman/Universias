@@ -49,7 +49,9 @@
         aria-label="Search" id="search_input">
       <i class="btn fas fa-search" aria-hidden="true"></i>
     </form>
+    {% if user.id == user_profile.pk %}
     <a href="/create_post/"><button class="btn bg-transparent inline m-1" name="newpost"><i class="fas fa-pen"></i></button></a>
+    {% endif %}
   </div>
       <table class="table table-bordered">
         <thead>

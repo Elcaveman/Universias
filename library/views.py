@@ -133,17 +133,15 @@ def create_post_view(request):
             post_object = form.save(commit=False)
             post_object.owner = request.user.profile
             post_object.save()
+            #when using commit = False we need to make sure we use form.save_m2m() to save ManytoMany fields
+            form.save_m2m()
             #an owner is an author aswell
             #we add it this late to avoid ValueError because the object
             #needs to have a value for field "id" before this many-to-many relationship can be used.
             post_object.authors.add(request.user.profile)
+            post_object.save()
             messages.success(request , "Post created successfully")
             return redirect('/profile/')
-        else:
-            if form.get('error_messages',None):
-                for msg in form.error_messages:
-                    messages.error(request , f"{msg}")
-        
     else:
         form = PostForm()
     return render(request , 'library/add_post.html' ,{'form':form})
