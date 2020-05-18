@@ -44,8 +44,8 @@ class Post(models.Model):
     TYPES=[('Doc','Document'),('Prj' , 'Project') , ('CP','conference paper') , ('Brev','Brevet'),('Proto' , 'Prototype')]
     
     title = models.CharField(max_length=100)
-    post_pic = models.ImageField(blank = True)
-    pub_type = models.CharField("Post type", max_length=20,choices=TYPES)
+    post_pic = models.ImageField("Picture",blank = True)
+    pub_type = models.CharField("Type", max_length=20,choices=TYPES)
     #need to add a field that is the owner of the post!!
     owner = models.ForeignKey('register.Profile',on_delete=models.CASCADE)
     authors= models.ManyToManyField(to="register.Profile", related_name='authors')

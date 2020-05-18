@@ -123,12 +123,7 @@ def update_profile(request):
             messages.success(request,'Your profile was successfully updated!')
             return redirect('/profile/')
         else:
-            for msg in user_form.error_messages:
-                messages.error(request , f"{msg} : {user_form.error_messages[msg]}")
-
-            for msg in profile_form.error_messages:
-                messages.error(request , f"{msg} : {profile_form.error_messages[msg]}")
-
+            pass
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)

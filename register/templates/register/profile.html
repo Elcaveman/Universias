@@ -1,11 +1,147 @@
 {% extends 'library/base.html' %}
-   
+{% load static %}
+
+{% block login_css %}
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
+  <!--===============================================================================================-->	
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+  <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+{% endblock login_css %}
+    
+
 {% block form %}
-<form method="post">
-    {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
-    <button type="submit">Save changes</button>
-</form>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30" style="width: 70vw; min-width:450px ;max-width:700px">
+            <form class="login100-form validate-form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <span class="login100-form-title p-b-55">
+                    Update Profile
+                </span>
+
+                <div class="wrap-input100 validate-input m-b-16">
+                    <!-- <input class="input100" type="password" name="pass" placeholder="Password"> -->
+                    {{ user_form.first_name }}
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <span class="lnr lnr-mustache"></span>
+                    </span>
+                </div>    
+
+                <div class="wrap-input100 validate-input m-b-16">
+                    {{ user_form.last_name }}
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <span class="lnr lnr-mustache"></span>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16">
+                    <!-- <input class="input100" type="password" name="pass" placeholder="Password"> -->
+                    {{ user_form.email }}
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <span class="lnr lnr-envelope"></span>
+                    </span>
+                </div>
+                
+                
+                {% for field in profile_form %}
+                    <div class="wrap-input100 validate-input m-b-16">
+                    <!-- <input class="input100" type="password" name="pass" placeholder="Password"> -->
+                    {{ field }}
+                    <span class="focus-input100"></span>
+                </div>
+                {% endfor %}
+                                    
+                <div class="container-login100-form-btn p-t-25">
+                    <button class="login100-form-btn" type="submit">
+                        Update
+                    </button>
+                </div>
+               
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock form %}
-  
+        
+
+{% block login_scripts %}
+
+    
+    {% for field in user_form %}
+        {% if field.errors %}
+            {% for error in field.errors %}
+            <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:10000})</script>
+        {% endfor %}
+        {% else %}
+            {#nothing lol}
+        {% endif %}
+    {% endfor %}
+
+    {% for field in profile_form %}
+        {% if field.errors %}
+            {% for error in field.errors %}
+            <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:15000})</script>
+        {% endfor %}
+        {% else %}
+    
+        {% endif %}
+    {% endfor %}
+        
+    
+        
+    <script>
+        
+        const fields = document.querySelectorAll('input');
+        let list =  ['','First Name' , 'Last Name' , 'Email',
+        'Checkbox','Profile Picture','Domaine', 
+        ]
+        fields.forEach((elt,count)=>{
+          if (elt.attributes['name'].value != 'profil_pic-clear' && elt.attributes['name'].value != 'profil_pic'){
+            // 6 is the profile pic thing
+            elt.className="input100";
+            elt.setAttribute('placeholder',list[count]);
+            if (list[count]=='Domaine'){
+                elt.parentElement.innerHTML += `<span class="symbol-input100">
+                        <i class="fas fa-meteor"></i>
+                    </span>`
+            }
+          }
+          else {
+            //add style
+          }
+        });
+        const textarea = document.querySelector('textarea')
+        textarea.className = 'form-control'
+        textarea.setAttribute('placeholder','Bio')
+
+        // <label for="file" class="label-file">Choisir une image</label>
+        // <input id="file" class="input-file" type="file">
+    </script>
+    <!--===============================================================================================-->	
+	<script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'login/vendor/bootstrap/js/popper.js' %}"></script>
+    <script src="{% static 'login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'login/js/main.js' %}"></script>
+{% endblock login_scripts %}
+    
+
+
+
+

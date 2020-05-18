@@ -32,7 +32,7 @@ class UserForm(forms.ModelForm):
     # using JS to set classes for now need to read django source code for form_classes :/
     class Meta:
         model = User
-        fields = ('username','first_name','last_name','email')
+        fields = ('first_name','last_name','email')
 
 class UserExtrasForm(forms.ModelForm):
     class Meta:
