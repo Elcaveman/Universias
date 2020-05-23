@@ -46,13 +46,12 @@ function populate_table(array){
     function delete_btn_html(user1 , user2 ,row_data_id){
         if (user1==user2){
             return `<a href="/delete_post/${row_data_id}">
-            <button class="btn btn-danger hidden">Delete</button></a>`
+            <button class="btn btn-danger">Delete</button></a>`;
         }
-        return ''
+        return '';
     }
     for (let i =0 ; i<array.length ; i++){
         row_data = array[i];
-        console.log(row_data)
         rowHTML=`<tr>
         <td>${row_data.title}</td>
         <td>${row_data.pub_type}</td>

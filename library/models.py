@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
 from register.models import Profile
@@ -20,6 +19,7 @@ class Team(models.Model):
     def get_perma_members(self):
         set = Profile.objects.filter(position='PM',team=self.id)
         return set
+
     def get_associate_members(self):
         set = Profile.objects.filter(position='AM',team=self.id)
         return set

@@ -334,3 +334,6 @@ a.hover-reverse:hover, a.hover-reverse:focus, a.hover-reverse:active {
 .wrapper{
   position:relative;
 }
+.hidden{
+  display: none;
+}

@@ -35,8 +35,6 @@
                   <div class="wrap-input100 validate-input m-b-16">
                   <!-- <input class="input100" type="password" name="pass" placeholder="Password"> -->
                   {{ field }}
-                  <span class="focus-input100"></span>
-
                   </div>    
                 {% endfor %}                    
                 <div class="container-login100-form-btn p-t-25">
@@ -58,7 +56,7 @@
     {% for field in form %}
         {% if field.errors %}
             {% for error in field.errors %}
-            <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:10000})</script>
+            <script>M.toast({html:"{{ field }}{{ error }}",classes:'red rounded' , displatLength:10000})</script>
         {% endfor %}
         {% endif %}
     {% endfor %}
@@ -66,20 +64,20 @@
         
   <script>    
     const fields_input = document.querySelectorAll('input[type="text"], input[type="url"]');
-    console.log(fields_input)
     const fields_select = document.querySelectorAll('select');
-    console.log(fields_select)
     const fields_FileField = document.querySelectorAll('input[type="file"]');
-    console.log(fields_FileField)
 
-    let list_input =  ['Title','URL','DOI', 'Google Scholar']
-    let list_input_icons = ['<i class="fas fa-tenge"></i>',
+    const list_input =  ['Title','URL','DOI', 'Google Scholar']
+    const list_input_icons = ['<i class="fas fa-tenge"></i>',
       '<i class="fa fa-link" aria-hidden="true"></i>',
       '<i class="fa fa-link" aria-hidden="true"></i>',
       '<i class="fas fa-graduation-cap"></i>'
     ]
-    let list_select = ['Type','Authors']
-    let list_FileField=['Post Picture','BIBTEX']
+    const list_select = ['Type','Authors']
+
+    const list_FileField=['Post Picture','BIBTEX']
+    const list_FileField_id = ['id_post_pic','id_bibtex']
+    const list_FileField_label = ['image','.bib']
     function icon(icon){
       return `<span class="symbol-input100">${icon}</span>`
     }
@@ -87,7 +85,7 @@
     for (let i=0 ; i<fields_input.length ; i++){
       fields_input[i].className="input100";
       fields_input[i].setAttribute('placeholder',list_input[i]);
-      fields_input[i].parentNode.innerHTML += icon(list_input_icons[i])
+      fields_input[i].parentNode.innerHTML += icon(list_input_icons[i])+'<span class="focus-input100"></span>'
     }
 
     for (let i=0 ; i<fields_select.length ; i++){
@@ -96,11 +94,40 @@
     }
 
     for (let i=0 ; i<fields_FileField.length ; i++){
+      //add label
+      
       let div = fields_FileField[i].parentElement
-      div.innerHTML = `<p>${list_FileField[i]}</p>`+div.innerHTML
+      div.innerHTML = `<p>${list_FileField[i]}</p>` + div.innerHTML
+      //    <div class="custom-file">
+      //   <label class='custom-file-label' for='${list_FileField_id[i]}'>Choose ${list_FileField_label[i]} file...</label>
+      //   ${div.innerHTML}
+      // </div>
+      //list_FileField[i].className = 'custom-file-input hidden'      
+      // add button+span for styling
+      //!  problem occured while connecting fake button and the input
+      //fields_FileField[i].className = "hidden"
+      // div.innerHTML += `<button type="button" class="btn btn-outline-primary">Choose a File</button>
+      // <span class="file-input-text">No file chosen</span>`
+      // const butn = div.querySelector('button');
+      // const span = div.querySelector(".file-input-text");
+      // butn.addEventListener("click",()=>{
+      //   fields_FileField[i].click();
+      // })
+      // fields_FileField[i].addEventListener("change",()=>{
+      //   if (fields_FileField[i].value != ""){
+      //     // we don't need the whole path! just the file name
+      //     span.innerHTML = fields_FileField[i].value.split('\\').pop();
+      //     // Regex for this one
+      //     //span.innerHTML = fields_FileField[i].value.match('/[\/\\]([\w\d\s\.\-\(\)]+)$/');
+      //   }
+      //   else{
+      //     span.innerHTML = 'No file chosen';
+      //   }
+      // })
     }
     const textarea = document.querySelector('textarea')
     textarea.className = 'form-control'
+    textarea.innerHTML +='<span class="focus-input100"></span>'
     textarea.setAttribute('placeholder','Description')
     
   </script>
@@ -114,12 +141,12 @@
     <!--===============================================================================================-->
     <script src="{% static 'login/js/main.js' %}"></script>
     <script src="{% static 'js/tail.select-full.min.js' %}"></script>
-    <!-- <script>
+    <script>
       tail.select('#id_pub_type' , {
 
       });
       tail.select('#id_authors',{search: true,
 });
-    </script> -->
+    </script>
 {% endblock login_scripts %}
  

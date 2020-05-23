@@ -4,8 +4,7 @@
 	background-repeat:no-repeat; 
 	background-image: url("../images/bgr.png");
 	width:100%;
-	background-size: 100% 720px;
-	background-position: cover;
+	background-size: cover;
 	padding-top: 50px;
 	padding-bottom: 100px;
 	-webkit-transition: .3s all ease-out;
@@ -20,7 +19,6 @@ h1{
 .extra{
 	background-color:#d0d7e1;
 	height:500px;
-	padding-top: 140px;
 }
 .fluid{
 	position: relative;

@@ -13,7 +13,5 @@ urlpatterns = [
     path('labs/',v.labs),
     path('teams/',v.teams),
     path('create_post/' , v.create_post_view , name='create_post'),
-    path('delete_post/<int:post_id>' , v.delete_post_view , name='delete_post'),
-    #tests
-    path('posts_test/',v.posts_test , name='posts_test'),
+    path('delete_post/<int:post_id>/' , v.delete_post_view , name='delete_post'),
 ]
