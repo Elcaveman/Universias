@@ -4,4 +4,5 @@ from . import models as m
 admin.site.register(m.Post)
 admin.site.register(m.Laboratory)
 admin.site.register(m.Team)
+admin.site.register(m.Revue)
 admin.site.register(m.Profile)

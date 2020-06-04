@@ -12,6 +12,9 @@ urlpatterns = [
     path('posts/<int:post_id>/',v.item,name='item_detail'),
     path('labs/',v.labs),
     path('teams/',v.teams),
+
     path('create_post/' , v.create_post_view , name='create_post'),
     path('delete_post/<int:post_id>/' , v.delete_post_view , name='delete_post'),
+    path('edit_post/<int:post_id>/' , v.edit_post_view , name='edit_post'),
+    
 ]

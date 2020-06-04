@@ -1,5 +1,6 @@
 import datetime
 
+from django.db.models import Count
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -24,8 +25,8 @@ handler500 = "library.views.view_500"
 @login_required
 def postsAPI(request):
     #use values to convert to JSON
+    posts_count = models.Post.objects.count()
     posts_queryset = models.Post.objects.all()
-    
     posts_list = list(posts_queryset.values(
         'id','title','pub_type','owner','timestamp'
     ))
@@ -64,17 +65,25 @@ def user_posts(request , user_id):
 
 #views
 def home(request):
-    contribs = models.Profile.objects.filter(position = "LC")
-    user_count = models.Profile.objects.count()
-    labs_count = models.Laboratory.objects.count()
-    posts_count = models.Post.objects.count()
-    context = {
-        'contribs': contribs,
-        'user_count': user_count,
-        'labs_count': labs_count,
-        'posts_count' : posts_count,
-    }
-    return render(request, 'library/homepage.html', context)
+    if request.user.is_authenticated:
+        pub_revue = models.Post.objects.all()
+        pub_domaine = models.Post.objects.all()
+        pub_labo =models.Post.objects.all()
+        pub_type = models.Post.objects.all()
+        new_users = models.Profile.objects.all()
+        return render(request , 'library/dashboard.html')
+    else:
+        contribs = models.Profile.objects.filter(position = "LC")
+        user_count = models.Profile.objects.count()
+        labs_count = models.Laboratory.objects.count()
+        posts_count = models.Post.objects.count()
+        context = {
+            'contribs': contribs,
+            'user_count': user_count,
+            'labs_count': labs_count,
+            'posts_count' : posts_count,
+        }
+        return render(request, 'library/homepage.html', context)
 @login_required
 def posts_test(request):
     return render(request , 'library/posts_table.html')
@@ -86,19 +95,10 @@ def posts(request):
     #?  1- pagination done in JS
     #?  2- passing data using an API instead of jinja + context
     #?  3- make responsive search bar and filters
-
-    posts_queryset = models.Post.objects.all()
-    page = request.GET.get('page', 1)
-    paginator = Paginator(posts_queryset, 10)
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        #if the user insput is not an integer point to 1st page
-        posts = paginator.page(1)
-    except EmptyPage:
-        #if we surpass the available nbr of pages point back to the lasters one
-        posts = paginator.page(paginator.num_pages)
-        
+    # we put 13 posts in a page
+    posts_count = models.Post.objects.count()
+    
+    
     return render(request, 'library/posts_table.html', { 'posts': posts })
 
 @login_required
@@ -160,4 +160,33 @@ def delete_post_view(request , post_id):
     else:
         messages.error(request,'You can\'t delete a post that isn\'t your own!')
     return redirect('/profile/')
-    
+
+@login_required
+def edit_post_view(request, post_id):
+    try:
+        post = models.Post.objects.filter(id=post_id)[0]
+    except:
+        messages.error(request,'This post doesn\'t exist')
+        return redirect('/profile/')
+    if request.user.pk == post.owner.pk:
+        if request.method == 'POST':
+            form = PostForm(request.POST , request.FILES,instance=post)
+            if form.is_valid():
+                form.save()
+                messages.success(request,'Post edited sucessfully')
+                return redirect('/profile/')
+            else:
+                if form.errors:#errors is a dictionnary
+                    base = {'pub_type':'Invalid Publication Type'}
+                    for error in form.errors:
+                        try :
+                            messages.error(request,base[error])
+                        except:
+                            pass
+                    
+        else:
+            form = PostForm(instance=post)
+        return render(request , 'library/add_post.html',{'form':form})
+    else:
+        messages.error(request,'You can\'t edit a post that isn\'t your own!')
+    return redirect('/profile/')

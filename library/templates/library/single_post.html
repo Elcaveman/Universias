@@ -36,12 +36,12 @@
       <div class="row justify-content-md-center">
         {% for author in post.authors.all %}
           <div class="col col-lg-4">
-          <div class="probootstrap-card text-center probootstrap-animate">
+          <div class="probootstrap-card text-center probootstrap-animate" style="margin-bottom: 1rem;">
             
             {% if author.profil_pic %}
-            <img src="{{ author.profil_pic.url }}" class="svg">
+              <img src="{{ author.profil_pic.url }}" class="svg">
             {% else %}
-            <img src="{% static 'images/man.png' %}" class="svg">
+              <img src="{% static 'images/man.png' %}" class="svg">
             {% endif %}
               
             
@@ -49,9 +49,9 @@
                 <h2>{{ author }}</h2>
                 
                 {% if author.position %}
-                <h3 class="title">{{ author.get_position_display }}</h3>
+                  <h3 class="title">{{ author.get_position_display }}</h3>
                 {% else %}
-                <p class="title">Chercheur</p>
+                  <h3 class="title">Chercheur</h3>
                 {% endif %}
                 <br>
                 <p>{{ author.bio|slice:100 }}</p>
@@ -102,12 +102,19 @@
             </div>
             
           </div>
-          <div class="col col-lg-4 text-center">
+          {% if post.revue %}
+          <!-- TODO:revue to be changed -->
+            <div class="col col-lg-4 text-center">
             <h3><strong>REVUE</strong></h3>
             <hr>
-            <img src="{% static 'images/SCOPUS.png' %}" class="chart center">
+            {% if post.revue.image %}
+              <img src="{{ post.revue.image.url }}" class="chart center">
+            {% endif %}
+            </div>
+          {% endif %}
+
   
-          </div>
+          
   
         </div>
       </div>

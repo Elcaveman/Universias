@@ -26,7 +26,13 @@ class Team(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+class Revue(models.Model):
+    name = models.CharField("Revue Name",max_length=30)
+    image = models.ImageField("Revue Image", upload_to='revues')
+    URL = models.URLField("URL", max_length=200)
+    def __str__(self):
+        return self.name
 
 class Laboratory(models.Model):
     name = models.CharField("Lab name",max_length=80)
@@ -41,8 +47,9 @@ class Laboratory(models.Model):
 
 
 class Post(models.Model):
-    TYPES=[('Doc','Document'),('Prj' , 'Project') , ('CP','conference paper') , ('Brev','Brevet'),('Proto' , 'Prototype')]
-    
+    TYPES=[('Document','Document'),('Project' , 'Project') , ('conference paper','conference paper') , ('Brevet','Brevet'),('Prototype' , 'Prototype')]
+    REVUES = [('SCOPUS','SCOPUS'),('EBSCO',)*2,('DBLP',)*2,('THOMPSON',)*2]
+
     title = models.CharField(max_length=100)
     post_pic = models.ImageField("Picture",blank = True)
     pub_type = models.CharField("Type", max_length=20,choices=TYPES)
@@ -50,7 +57,8 @@ class Post(models.Model):
     owner = models.ForeignKey('register.Profile',on_delete=models.CASCADE)
     authors= models.ManyToManyField(to="register.Profile", related_name='authors')
     description = models.TextField()
-
+    #TODO: make revue a model with image/url field
+    revue = models.ForeignKey("library.Revue",null=True,blank=True, on_delete=models.SET_NULL)
     #extras/personal links
     URL = models.URLField(max_length=200)
     DOI = models.URLField(max_length=200)

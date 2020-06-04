@@ -17,6 +17,7 @@
   <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tail.select-light-feather.min.css' %}"/>
 {% endblock login_css %}
     
 
@@ -85,8 +86,6 @@
             {% for error in field.errors %}
             <script>M.toast({html:"{{ error }}",classes:'red rounded' , displatLength:10000})</script>
         {% endfor %}
-        {% else %}
-            {#nothing lol}
         {% endif %}
     {% endfor %}
 
@@ -103,26 +102,23 @@
     
         
     <script>
-        
+        const fields_select = document.querySelectorAll('select');
         const fields = document.querySelectorAll('input');
         let list =  ['','First Name' , 'Last Name' , 'Email',
-        'Checkbox','Profile Picture','Domaine', 
+        'Checkbox','Profile Picture', 
         ]
+        const list_select = ['Domaine',]
         fields.forEach((elt,count)=>{
           if (elt.attributes['name'].value != 'profil_pic-clear' && elt.attributes['name'].value != 'profil_pic'){
             // 6 is the profile pic thing
             elt.className="input100";
             elt.setAttribute('placeholder',list[count]);
-            if (list[count]=='Domaine'){
-                elt.parentElement.innerHTML += `<span class="symbol-input100">
-                        <i class="fas fa-meteor"></i>
-                    </span>`
-            }
-          }
-          else {
-            //add style
           }
         });
+        for (let i=0 ; i<fields_select.length ; i++){
+        let div = fields_select[i].parentElement
+        div.innerHTML = `<p>${list_select[i]}</p>`+div.innerHTML
+        }
         const textarea = document.querySelector('textarea')
         textarea.className = 'form-control'
         textarea.setAttribute('placeholder','Bio')
@@ -139,6 +135,10 @@
     <script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
     <!--===============================================================================================-->
     <script src="{% static 'login/js/main.js' %}"></script>
+    <script src="{% static 'js/tail.select-full.min.js' %}"></script>
+    <script>
+      tail.select('#id_domaine',{search: true,});
+    </script>
 {% endblock login_scripts %}
     
 

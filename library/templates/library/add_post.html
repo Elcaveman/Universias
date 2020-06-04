@@ -18,17 +18,17 @@
     <link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/tail.select-light-feather.min.css' %}"/>
-    {% endblock login_css %}
+{% endblock login_css %}
     
 
 {% block form %}
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30" style="width: 70vw; min-width:450px ;max-width:700px">
-            <form class="login100-form validate-form" method="POST" enctype="multipart/form-data">
+            <form class="login100-form validate-form" method="POST" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
                 <span class="login100-form-title p-b-55">
-                    New Post
+                    Post
                 </span>
                 
                 {% for field in form %}
@@ -73,7 +73,7 @@
       '<i class="fa fa-link" aria-hidden="true"></i>',
       '<i class="fas fa-graduation-cap"></i>'
     ]
-    const list_select = ['Type','Authors']
+    const list_select = ['Type','Authors' ,'Revue']
 
     const list_FileField=['Post Picture','BIBTEX']
     const list_FileField_id = ['id_post_pic','id_bibtex']
@@ -142,11 +142,9 @@
     <script src="{% static 'login/js/main.js' %}"></script>
     <script src="{% static 'js/tail.select-full.min.js' %}"></script>
     <script>
-      tail.select('#id_pub_type' , {
-
-      });
-      tail.select('#id_authors',{search: true,
-});
+      tail.select('#id_pub_type' , {});
+      tail.select('#id_authors',{search: true,});
+      tail.select('#id_revue',{search: true,});
     </script>
 {% endblock login_scripts %}
  

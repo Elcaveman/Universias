@@ -38,15 +38,22 @@ $.ajax({
         populate_table(array)
     }
 });
+
+function pages_buttons(table){
+    let html = '';
+    table.parrentNode.innerHTML += html;
+}
 function populate_table(array){
     const table = document.getElementById("PostsTable")
     //let's clean the table first!
     // need to define a limit kinda like the facbook thing
     table.innerHTML = '';
-    function delete_btn_html(user1 , user2 ,row_data_id){
+    function custom_btn_html(user1 , user2 ,row_data_id){
         if (user1==user2){
             return `<a href="/delete_post/${row_data_id}">
-            <button class="btn btn-danger">Delete</button></a>`;
+            <button class="btn btn-danger">Delete</button></a>
+            <a href="/edit_post/${row_data_id}">
+            <button class="btn btn-warning">Edit</button></a>`;
         }
         return '';
     }
@@ -61,7 +68,7 @@ function populate_table(array){
             <a href="/posts/${row_data.id}">
                 <button class="btn btn-info m-1">Info</button>
             </a>
-            ${delete_btn_html(user , row_data.owner , row_data.id)}
+            ${custom_btn_html(user , row_data.owner , row_data.id)}
         </td>
         </tr>`;
         table.innerHTML += rowHTML;
