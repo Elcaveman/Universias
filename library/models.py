@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-
+from django.utils import timezone
 from register.models import Profile
 
 class Team(models.Model):
@@ -53,6 +53,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     post_pic = models.ImageField("Picture",blank = True)
     pub_type = models.CharField("Type", max_length=20,choices=TYPES)
+    domaine = models.CharField("Domaine",max_length=100,choices=Profile.DOMAINS,null=True , blank=True)
     #need to add a field that is the owner of the post!!
     owner = models.ForeignKey('register.Profile',on_delete=models.CASCADE)
     authors= models.ManyToManyField(to="register.Profile", related_name='authors')
@@ -67,7 +68,7 @@ class Post(models.Model):
     google_scholar = models.URLField("Google Scholar" ,max_length=200 ,help_text='click to search Google Scholar for this entry')
     bibtex = models.FileField('BIBTEX',upload_to='bibtex', max_length=100 , help_text='click to download the BibTEX formated file')
 
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(default=timezone.now)
     def __str__(self):
         return self.title
     

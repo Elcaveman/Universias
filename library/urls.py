@@ -3,9 +3,10 @@ from . import views as v
 app_name = 'library'
 
 urlpatterns = [
-    #API data(must be in a seperate app)
+    #API data
     path('postsAPI/' , v.postsAPI , name='postsAPI'),
     path('user_posts/<int:user_id>/',v.user_posts , name='user_posts'),
+    path('charts/',v.charts , name='charts'),
     #views
     path('',v.home,name='home'),
     path('posts/',v.posts,name='posts'),

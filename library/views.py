@@ -18,6 +18,8 @@ from django.template import RequestContext
 from .forms import PostForm
 import json
 
+from django.db import connection
+
 handler404 = "library.views.view_404"
 handler500 = "library.views.view_500"
 
@@ -62,21 +64,52 @@ def user_posts(request , user_id):
     #why we call it safe? welp
     #?Before ECMAScript5 it was possible to poison the JavaScript Array constructor.
     return JsonResponse(posts_list, safe = False)
-
+@login_required
+def charts(request):
+    context = {}
+    def raw_query(query):
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            tuple_list = cursor.fetchall()#returns a list or rows(tuples)
+            return tuple_list
+        
+    context['posts_by_type_monthly']=raw_query("""SELECT date_trunc('month', timestamp) AS post_month, pub_type ,count(*) as monthly_posts
+        FROM public.library_post
+        GROUP BY post_month, pub_type;""")[:10]
+    
+    context['posts_by_domaine_total'] = raw_query("""SELECT domaine ,count(id) as total_posts
+        FROM public.library_post
+        GROUP BY domaine;""")[:10]
+    context['posts_by_revue_total'] = raw_query("""SELECT  rev.name,count(post.id) as total_posts
+        FROM public.library_post as post
+		Inner Join public.library_revue as rev
+		On rev.id = post.revue_id
+        GROUP BY rev.name;""")[:10]
+    # pos = models.Post.objects.raw("""SELECT id,date_trunc('month', timestamp) AS post_month, pub_type ,count(*) as monthly_posts
+    # FROM public.library_post
+    # GROUP BY post_month, pub_type;""")
+    # for elt in pos:
+    #     print(elt)
+    #TODO: not doing pub by lab for now till i figure out a secure way to handle posts linked to a labo to avoid fraud ..
+    #?revue_id for revue//domaine//pub_type for type
+    #TODO: I don't know if clauses are exploitable or not for sql injection so i stick with a static string
+    #////////////////////////////////////////////////////////////////////
+    return JsonResponse(context , safe=False)
 #views
 def home(request):
+    user_count = models.Profile.objects.count()
+    labs_count = models.Laboratory.objects.count()
+    posts_count = models.Post.objects.count()
     if request.user.is_authenticated:
-        pub_revue = models.Post.objects.all()
-        pub_domaine = models.Post.objects.all()
-        pub_labo =models.Post.objects.all()
-        pub_type = models.Post.objects.all()
-        new_users = models.Profile.objects.all()
-        return render(request , 'library/dashboard.html')
+        # date_joined based query to get total new users!
+        context = {
+            'user_count': user_count,
+            'labs_count': labs_count,
+            'posts_count' : posts_count,
+        }
+        return render(request , 'library/dashboard.html' , context)
     else:
         contribs = models.Profile.objects.filter(position = "LC")
-        user_count = models.Profile.objects.count()
-        labs_count = models.Laboratory.objects.count()
-        posts_count = models.Post.objects.count()
         context = {
             'contribs': contribs,
             'user_count': user_count,
